@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import sys
 import os
 import shutil
@@ -25,7 +24,7 @@ def safe_mkdir(dest):
 
 installs = sys.argv[1:]
 if installs == ['all']:
-    installs = ['vim', 'tmux']
+    installs = ['vim', 'tmux', 'zsh']
 
 for install in installs:
     print "installing %s" % install
@@ -38,5 +37,7 @@ for install in installs:
         safe_mkdir("vim/tmp/backup")
     elif install == 'tmux':
         safe_ln('tmux/tmux.conf', '.tmux.conf')
+    elif install == 'zsh':
+        safe_ln('zsh/zshrc', '.zshrc')
     else:
         print "Invalid install requested: %s" % install

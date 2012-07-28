@@ -1,0 +1,54 @@
+# Path to your oh-my-zsh configuration.
+export ZSH=$HOME/dotfiles/zsh/oh-my-zsh
+
+# Set name of the theme to load.
+# Look in oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+export ZSH_THEME="santiycr"
+
+# Set to this to use case-sensitive completion
+# export CASE_SENSITIVE="true"
+
+# Comment this out to disable weekly auto-update checks
+# export DISABLE_AUTO_UPDATE="true"
+
+# Uncomment following line if you want to disable colors in ls
+# export DISABLE_LS_COLORS="true"
+
+# Uncomment following line if you want to disable autosetting terminal title.
+# export DISABLE_AUTO_TITLE="true"
+
+# Which plugins would you like to load? (plugins can be found in oh-my-zsh/plugins/*)
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(brew osx git github pip ssh-agent bundler gem rails3 rvm svn fabric zsh-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
+
+#Nodepath
+export NODE_PATH=/usr/local/lib/node
+
+# Path setups
+export PATH=$HOME/bin:$HOME/.venvburrito/bin:$HOME/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:$PATH
+. $HOME/.venvburrito/startup.sh
+
+# Custom setups
+source ~/setenv.sh
+source ~/sauce_env.sh
+
+# use MacVim if avail instead of term vim
+if which mvim &> /dev/null; then
+    alias vim="mvim"
+    alias vimdiff="mvimdiff"
+    # Use macvim for git commit messages
+    export EDITOR='mvim -f -c "au VimLeave * !open -a iTerm"'
+else
+    export EDITOR='vim'
+fi
+
+alias firefox='export -n DYLD_LIBRARY_PATH ; /Applications/Firefox.app/Contents/MacOS/firefox-bin'
+
+bindkey '\e.' insert-last-word  
+
+# load RVM into a shell session.
+[[ -s "/Users/sso/.rvm/scripts/rvm" ]] && source "/Users/sso/.rvm/scripts/rvm" 
