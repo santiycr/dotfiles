@@ -23,7 +23,11 @@ def safe_mkdir(dest):
     if not os.path.isdir(dest):
         os.mkdir(dest)
 
-for install in sys.argv[1:]:
+installs = sys.argv[1:]
+if installs == ['all']:
+    installs = ['vim', 'tmux']
+
+for install in installs:
     print "installing %s" % install
     if install == 'vim':
         safe_ln('vim/vimrc', '.vimrc')
@@ -32,3 +36,7 @@ for install in sys.argv[1:]:
         safe_mkdir("vim/tmp/swap")
         safe_mkdir("vim/tmp/undo")
         safe_mkdir("vim/tmp/backup")
+    elif install == 'tmux':
+        safe_ln('tmux/tmux.conf', '.tmux.conf')
+    else:
+        print "Invalid install requested: %s" % install
