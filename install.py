@@ -18,9 +18,17 @@ def safe_ln(source, dest):
         shutil.move(dest, dest+".orig")
     os.symlink(source, dest)
 
+def safe_mkdir(dest):
+    dest = "%s/%s" % (DOTFILES_PATH, dest)
+    if not os.path.isdir(dest):
+        os.mkdir(dest)
+
 for install in sys.argv[1:]:
     print "installing %s" % install
     if install == 'vim':
         safe_ln('vim/vimrc', '.vimrc')
         safe_ln('vim/vimrc', '.gvimrc')
         safe_ln('vim', '.vim')
+        safe_mkdir("vim/tmp/swap")
+        safe_mkdir("vim/tmp/undo")
+        safe_mkdir("vim/tmp/backup")
