@@ -1,0 +1,240 @@
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+filetype off
+call pathogen#infect()
+call pathogen#helptags()
+
+filetype plugin indent on
+
+set nocompatible
+set encoding=utf8
+set fileformat=unix
+set modelines=0
+set autoindent
+set showmode
+set showcmd
+set hidden
+set visualbell
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set number
+set laststatus=2
+set history=1000
+set undofile
+set undoreload=10000
+set shell=zsh
+set lazyredraw
+set matchtime=3
+set showbreak=↪
+set splitbelow
+set splitright
+set fillchars=diff:⣿,vert:│
+set autowrite
+set autoread
+set shiftround
+set title
+set linebreak
+set colorcolumn=+1
+
+" scrolling
+set scrolloff=3
+set sidescroll=1
+set sidescrolloff=10
+
+"Set font type and size. Depends on the resolution. Larger screens, prefer h20
+set guifont=Consolas:h16
+
+" Better Completion
+set completeopt=longest,menuone,preview
+
+" Resize splits when the window is resized
+au VimResized * :wincmd =
+
+" python tweaks
+let g:pymode_folding = 0
+let g:pymode_rope = 0
+let g:pymode_breakpoint = 0
+let g:pymode_lint = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_enable_balloons = 0
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+
+"Color scheme
+syntax enable
+set background=dark
+colorscheme solarized
+
+" tabs and spaces
+set expandtab
+set smarttab
+set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+au BufNewFile,BufReadPost *.css,*.html,*.mako,*.rb,*.erb,*.coffee set shiftwidth=2
+
+" other visuals
+" Wildmenu
+
+set wildmenu
+set wildmode=list:longest
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+set wildignore+=migrations                       " Django migrations
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.orig                           " Merge resolution files
+
+" folds
+set foldlevel=0
+nnoremap <Space> za
+vnoremap <Space> za
+
+"Better line wrapping
+set wrap
+set textwidth=80
+set formatoptions=qrn1
+
+" search
+set ignorecase
+set smartcase
+set incsearch
+set showmatch
+set hlsearch
+
+" Spellcheck with vim (set spell / set nospell)
+set dictionary=/usr/share/dict/words
+set spellfile=~/.vim/custom-dictionary.utf-8.add
+syn spell toplevel
+
+" Automatically reload vimrc
+autocmd! bufwritepost vimrc source ~/.vimrc
+
+" Backups
+set undodir=~/.vim/tmp/undo//     " undo files
+set backupdir=~/.vim/tmp/backup// " backups
+set directory=~/.vim/tmp/swap//   " swap files
+set backup                        " enable backups
+set noswapfile                    " It's 2012, Vim.
+
+" Use the below highlight group when displaying bad whitespace is desired
+highlight BadWhitespace ctermbg=red guibg=red
+
+" Make trailing whitespace be flagged as bad.
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" Delete trailing whitespace on saving py files
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+
+au BufEnter *.mako set syntax=mako
+
+" Pydiction
+let g:pydiction_location = '~/.vim/vimfiles/ftplugin/pydiction/complete-dict'
+
+" shortcuts and abbreviations
+abbreviate pdbst import pdb;pdb.set_trace()
+abbreviate lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+" Remove whitespace on lines end
+nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>
+" Gundo.vim window
+nnoremap <leader>u :GundoToggle<CR>
+" MiniBufferExplorer
+nnoremap <leader>b :TMiniBufExplorer<CR>
+let g:miniBufExplorerMoreThanOne=4
+" Visually select the text that was last edited/pasted
+noremap <leader>v `[v`]
+" Alphabetically sort CSS properties in file with :SortCSS
+:command! SortCSS :g#\({\n\)\@<=#.,/}/sort
+" Toggle [i]nvisible characters
+nnoremap <leader>i :set list!<cr>
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+" Ack for the last search.
+nnoremap <silent> <leader>ack :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+" Yankring
+nnoremap <silent> <leader>y :YRShow<CR> 
+
+" Emacs bindings in command line mode
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+
+" Sudo to write
+cnoremap w!! w !sudo tee % >/dev/null
+
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+
+if has('gui_running')
+
+    " Remove all the UI cruft
+    set go-=T
+    set go-=l
+    set go-=L
+    set go-=r
+    set go-=R
+    set foldenable
+    set so=7
+
+    " Different cursors for different modes.
+    set guicursor=n-v-c:blinkon0
+    set guicursor+=i:blinkwait10
+
+    if has("gui_macvim")
+        " Full screen means FULL screen
+        set fuoptions=maxvert,maxhorz
+
+        " CommandT
+        macmenu &File.New\ Tab key=<nop>
+        map <D-t> :CommandT<CR>
+        " free up Command-F and toggle fullscreen mode
+        macmenu &Edit.Find.Find\.\.\. key=<nop>
+        map <D-f> :set invfu<CR>
+
+        " Use the normal HIG movements, except for M-Up/Down
+        let macvim_skip_cmd_opt_movement = 1
+        no   <D-Left>       <Home>
+        no!  <D-Left>       <Home>
+        no   <M-Left>       <C-Left>
+        no!  <M-Left>       <C-Left>
+
+        no   <D-Right>      <End>
+        no!  <D-Right>      <End>
+        no   <M-Right>      <C-Right>
+        no!  <M-Right>      <C-Right>
+
+        no   <D-Up>         <C-Home>
+        ino  <D-Up>         <C-Home>
+        imap <M-Up>         <C-o>{
+
+        no   <D-Down>       <C-End>
+        ino  <D-Down>       <C-End>
+        imap <M-Down>       <C-o>}
+
+        imap <M-BS>         <C-w>
+        inoremap <D-BS>     <esc>my0c`y
+    else
+        " Non-MacVim GUI, like Gvim
+    end
+else
+    " Console Vim
+    " For me, this means iTerm2, possibly through tmux
+    " Mouse support
+    set mouse=a
+endif
+
+" Use Node.js for JavaScript interpretation
+let $JS_CMD='node'
+
+" nerdtree
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+" 256 color mode
+set t_Co=256 
