@@ -1,17 +1,20 @@
 [user]
-	name = santi
+	name = Santiago Suarez Ordoñez
 	email = santiycr@gmail.com
 [color]
 	diff = auto
 	status = auto
 	branch = auto
+        interactive = auto
 	ui = true
 [alias]
 	co = checkout
 	st = status
 	ci = commit
+        re = rebase
+        fe = fetch
 [push]
-	default = matching
+	default = current
 [apply]
 	whitespace = nowarn
 [github]
