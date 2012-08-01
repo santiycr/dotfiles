@@ -22,7 +22,7 @@ def safe_ln(source, dest):
 
 
 def safe_mkdir(dest):
-    dest = "%s/%s" % (DOTFILES_PATH, dest)
+    dest = "%s/%s" % (HOME_PATH, dest)
     if not os.path.isdir(dest):
         os.mkdir(dest)
 
@@ -49,6 +49,6 @@ for install in installs:
     elif install == 'bin':
         safe_mkdir("bin")
         for script in os.listdir(DOTFILES_PATH + '/bin'):
-            safe_ln(script, 'bin/' + os.path.basename(script))
+            safe_ln('bin/' + script, 'bin/' + os.path.basename(script))
     else:
         print "Invalid install requested: %s" % install
