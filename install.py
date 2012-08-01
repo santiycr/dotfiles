@@ -29,7 +29,7 @@ def safe_mkdir(dest):
 
 installs = sys.argv[1:]
 if installs == ['all']:
-    installs = ['vim', 'tmux', 'zsh', 'git', 'bin', 'dotfiles']
+    installs = ['dotfiles', 'vim', 'tmux', 'zsh', 'git', 'bin']
 
 for install in installs:
     print "installing %s" % install
@@ -45,6 +45,7 @@ for install in installs:
         safe_ln('tmux/tmux.conf', '.tmux.conf')
     elif install == 'zsh':
         safe_ln('zsh/zshrc', '.zshrc')
+        os.system("chsh -s /bin/zsh")
     elif install == 'git':
         safe_ln('git/gitconfig', '.gitconfig')
     elif install == 'bin':
