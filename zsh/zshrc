@@ -30,11 +30,14 @@ export NODE_PATH=/usr/local/lib/node
 
 # Path setups
 export PATH=$HOME/bin:$HOME/.venvburrito/bin:$HOME/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:$PATH
-. $HOME/.venvburrito/startup.sh
+if [ -e $HOME/.venvburrito/startup.sh ]; then
+    source $HOME/.venvburrito/startup.sh
+fi
 
 # Custom setups
-source ~/setenv.sh
-source ~/sauce_env.sh
+if [ -e $HOME/setenv.sh ]; then
+    source $HOME/setenv.sh
+fi
 
 # use MacVim if avail instead of term vim
 if which mvim &> /dev/null; then
