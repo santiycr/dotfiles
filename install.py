@@ -29,7 +29,7 @@ def safe_mkdir(dest):
 
 installs = sys.argv[1:]
 if installs == ['all']:
-    installs = ['vim', 'tmux', 'zsh', 'git', 'bin']
+    installs = ['vim', 'tmux', 'zsh', 'git', 'bin', 'dotfiles']
 
 for install in installs:
     print "installing %s" % install
@@ -37,10 +37,10 @@ for install in installs:
         safe_ln('vim/vimrc', '.vimrc')
         safe_ln('vim/vimrc', '.gvimrc')
         safe_ln('vim', '.vim')
-        safe_mkdir("vim/tmp")
-        safe_mkdir("vim/tmp/swap")
-        safe_mkdir("vim/tmp/undo")
-        safe_mkdir("vim/tmp/backup")
+        safe_mkdir(".vim/tmp")
+        safe_mkdir(".vim/tmp/swap")
+        safe_mkdir(".vim/tmp/undo")
+        safe_mkdir(".vim/tmp/backup")
     elif install == 'tmux':
         safe_ln('tmux/tmux.conf', '.tmux.conf')
     elif install == 'zsh':
@@ -51,5 +51,7 @@ for install in installs:
         safe_mkdir("bin")
         for script in os.listdir(DOTFILES_PATH + '/bin'):
             safe_ln('bin/' + script, 'bin/' + os.path.basename(script))
+    elif install == 'dotfiles':
+        os.system("cd %s; git submodule init; git submodule update" % DOTFILES_PATH)
     else:
         print "Invalid install requested: %s" % install
