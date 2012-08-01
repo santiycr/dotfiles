@@ -37,6 +37,7 @@ for install in installs:
         safe_ln('vim/vimrc', '.vimrc')
         safe_ln('vim/vimrc', '.gvimrc')
         safe_ln('vim', '.vim')
+        safe_mkdir("vim/tmp")
         safe_mkdir("vim/tmp/swap")
         safe_mkdir("vim/tmp/undo")
         safe_mkdir("vim/tmp/backup")
