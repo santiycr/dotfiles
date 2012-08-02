@@ -21,7 +21,7 @@ export ZSH_THEME="santiycr"
 
 # Which plugins would you like to load? (plugins can be found in oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew osx git github pip ssh-agent bundler gem rails3 rvm svn fabric zsh-syntax-highlighting)
+plugins=(brew osx git github pip bundler gem rails3 rvm svn fabric zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
