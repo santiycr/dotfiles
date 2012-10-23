@@ -17,15 +17,15 @@ tmux rename-window -t $SESSION:0 Workspace
 tmux send -t 0 'cds'
 tmux send -t 0 'Enter'
 tmux selectp -t 0                                # Select pane 0
-tmux splitw -h -p 40 # Split pane 0 vertically and give it 40%
+tmux splitw -h -p 50 # Split pane 0 vertically and give it 40%
 tmux send -t 1 'drip'
 tmux send -t 1 'Enter'
 tmux selectp -t 1                                # Select pane 1
-tmux splitw -v -p 80 # Split pane 1 horizontally, keep 20%
+tmux splitw -v -p 90 # Split pane 1 horizontally, keep 10%
 tmux send -t 2 'velour'
 tmux send -t 2 'Enter'
 tmux selectp -t 2                                # Select pane 2
-tmux splitw -v -p 75 # Split pane 2 horizontally, keep 25%
+tmux splitw -v -p 88 # Split pane 2 horizontally, keep 10%
 tmux send -t 3 'ssh sso.dev.saucelabs.com'
 tmux send -t 3 'Enter'
 tmux selectp -t 0                                # Select pane 0
