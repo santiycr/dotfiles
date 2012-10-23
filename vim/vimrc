@@ -194,6 +194,7 @@ if has('gui_running')
         " CommandT
         macmenu &File.New\ Tab key=<nop>
         map <D-t> :CommandT<CR>
+        let g:CommandTMaxHeight = 20
         " free up Command-F and toggle fullscreen mode
         macmenu &Edit.Find.Find\.\.\. key=<nop>
         map <D-f> :set invfu<CR>
