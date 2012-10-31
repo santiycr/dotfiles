@@ -13,7 +13,7 @@ def safe_ln(source, dest):
     dest = "%s/%s" % (HOME_PATH, dest)
     if os.path.islink(dest):
         print ("Existing link in %s to %s found. Unlinking."
-                % (dest, os.path.realpath(dest)))
+               % (dest, os.path.realpath(dest)))
         os.unlink(dest)
     elif os.path.isfile(dest) or os.path.isdir(dest):
         print "Already existing config found. Moving up to %s.orig" % dest
@@ -29,7 +29,7 @@ def safe_mkdir(dest):
 
 installs = sys.argv[1:]
 if installs == ['all']:
-    installs = ['dotfiles', 'vim', 'tmux', 'zsh', 'git', 'bin']
+    installs = ['dotfiles', 'vim', 'tmux', 'zsh', 'git', 'pep8', 'bin']
 
 for install in installs:
     print "installing %s" % install
@@ -55,5 +55,7 @@ for install in installs:
             safe_ln('bin/' + script, 'bin/' + os.path.basename(script))
     elif install == 'dotfiles':
         os.system("cd %s; git submodule init; git submodule update" % DOTFILES_PATH)
+    elif install == 'pep8':
+        safe_ln('pep8/pep8', '.pep8')
     else:
         print "Invalid install requested: %s" % install
