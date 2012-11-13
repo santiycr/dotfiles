@@ -34,6 +34,7 @@ set autoread
 set shiftround
 set title
 set linebreak
+set cursorline
 set colorcolumn=+1
 
 " scrolling
