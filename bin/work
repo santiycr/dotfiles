@@ -11,8 +11,8 @@ fi
 
 # create a new session, named $SESSION, and detach from it
 tmux new-session -d -s $SESSION
-tmux set-window-option -t $SESSION:1 automatic-rename off
-tmux rename-window -t $SESSION:1 Workspace
+tmux set-window-option -t $SESSION:0 automatic-rename off
+tmux rename-window -t $SESSION:0 Workspace
 
 tmux send -t 0 'cds'
 tmux send -t 0 'Enter'
@@ -29,5 +29,9 @@ tmux splitw -v -p 88 # Split pane 2 horizontally, keep 10%
 tmux send -t 3 'ssh sso.dev.saucelabs.com'
 tmux send -t 3 'Enter'
 tmux selectp -t 0                                # Select pane 0
+tmux new-window                                  # New window
+tmux send -t 0 'cd ~/SauceLabs/tests'
+tmux send -t 0 'Enter'
+tmux select-window -t 0
 
 tmux attach-session -d -t $SESSION
