@@ -67,3 +67,6 @@
 [submodule "vim/bundle/vim-scala"]
 	path = vim/bundle/vim-scala
 	url = https://github.com/derekwyatt/vim-scala.git
+[submodule "vim/bundle/minibufexpl"]
+	path = vim/bundle/minibufexpl
+	url = git://github.com/fholgado/minibufexpl.vim.git
