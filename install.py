@@ -30,7 +30,7 @@ def safe_mkdir(dest):
 
 installs = sys.argv[1:]
 if installs == ['all']:
-    installs = ['dotfiles', 'vim', 'tmux', 'zsh', 'git', 'pep8', 'bin']
+    installs = ['dotfiles', 'vim', 'tmux', 'zsh', 'git', 'lint', 'bin']
 
 for install in installs:
     print "installing %s" % install
@@ -56,15 +56,22 @@ for install in installs:
             safe_ln('bin/' + script, 'bin/' + os.path.basename(script))
     elif install == 'dotfiles':
         os.system("cd %s; git submodule init; git submodule update" % DOTFILES_PATH)
-    elif install == 'pep8':
+    elif install == 'lint':
         with open(os.devnull, "w") as devnull:
+
             for lint in ['pep8', 'flake8']:
                 if not subprocess.call(['which', '-s', lint],
                                        stdout=devnull, stderr=devnull):
                     break
             else:
-                print "WARNING: No pep8 lint-like found"
+                print "WARNING: No pep8 lint-like found in path"
 
-        safe_ln('pep8/pep8', '.pep8')
+            for lint in ['jshint']:
+                if subprocess.call(['which', '-s', lint],
+                                   stdout=devnull, stderr=devnull):
+                    print "WARNING: No %s binary found in path" % lint
+
+        safe_ln('lint/pep8', '.pep8')
+        safe_ln('lint/jshintrc', '.jshintrc')
     else:
         print "Invalid install requested: %s" % install
