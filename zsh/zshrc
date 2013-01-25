@@ -1,8 +1,3 @@
-# Custom setups
-if [ -e $HOME/setenv.sh ]; then
-    source $HOME/setenv.sh pre-oh-my-zsh
-fi
-
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/dotfiles/zsh/oh-my-zsh
 
@@ -34,11 +29,6 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-# Custom setups
-if [ -e $HOME/setenv.sh ]; then
-    source $HOME/setenv.sh post-oh-my-zsh
-fi
-
 #Nodepath
 export NODE_PATH=/usr/local/lib/node
 
@@ -46,6 +36,11 @@ export NODE_PATH=/usr/local/lib/node
 export PATH=$HOME/bin:$HOME/.venvburrito/bin:$HOME/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:$PATH:/usr/local/share/npm/bin
 if [ -e $HOME/.venvburrito/startup.sh ]; then
     source $HOME/.venvburrito/startup.sh
+fi
+
+# Custom setups
+if [ -e $HOME/setenv.sh ]; then
+    source $HOME/setenv.sh
 fi
 
 # use MacVim if avail instead of term vim
