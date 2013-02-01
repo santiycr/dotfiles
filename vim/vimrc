@@ -61,6 +61,9 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_enable_balloons = 0
 au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 
+" json tweaks
+au BufNewFile,BufReadPost *.json set filetype=json
+
 "Color scheme
 syntax enable
 set background=dark
@@ -72,7 +75,7 @@ set smarttab
 set tabstop=8
 set softtabstop=4
 set shiftwidth=4
-au BufNewFile,BufReadPost *.css,*.html,*.mako,*.rb,*.erb,*.coffee set shiftwidth=2
+au BufNewFile,BufReadPost *.css,*.html,*.mako,*.rb,*.erb,*.coffee,*.js,*.json set shiftwidth=2
 
 " other visuals
 " Wildmenu
@@ -91,8 +94,6 @@ set wildignore+=*.orig                           " Merge resolution files
 
 " folds
 set foldlevel=0
-nnoremap <Space> za
-vnoremap <Space> za
 
 "Better line wrapping
 set wrap
@@ -105,7 +106,10 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
-
+" Press Space to turn off highlighting and clear any message already displayed.
+:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+" Nice highlighting style
+:highlight Search gui=underline,bold guifg=#5f5faf guibg=#002b36 
 " Spellcheck with vim (set spell / set nospell)
 set dictionary=/usr/share/dict/words
 set spellfile=~/.vim/custom-dictionary.utf-8.add
@@ -149,6 +153,7 @@ nnoremap <leader>u :GundoToggle<CR>
 " MiniBufferExplorer
 nnoremap <leader>b :TMiniBufExplorer<CR>
 let g:miniBufExplorerMoreThanOne=4
+let g:miniBufExplSplitBelow=0
 " Visually select the text that was last edited/pasted
 noremap <leader>v `[v`]
 " Alphabetically sort CSS properties in file with :SortCSS
@@ -168,10 +173,6 @@ cnoremap <c-e> <end>
 
 " Sudo to write
 cnoremap w!! w !sudo tee % >/dev/null
-
-" Space to toggle folds.
-nnoremap <Space> za
-vnoremap <Space> za
 
 if has('gui_running')
 
