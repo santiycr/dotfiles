@@ -43,7 +43,7 @@ set sidescroll=1
 set sidescrolloff=10
 
 "Set font type and size. Depends on the resolution. Larger screens, prefer h20
-set guifont=Inconsolata:h16
+set guifont=Inconsolata\ for\ Powerline:h16
 
 " Better Completion
 set completeopt=longest,menuone,preview
@@ -151,8 +151,7 @@ nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>
 " Gundo.vim window
 nnoremap <leader>u :GundoToggle<CR>
 " MiniBufferExplorer
-nnoremap <leader>b :TMiniBufExplorer<CR>
-let g:miniBufExplorerMoreThanOne=4
+nnoremap <leader>b :MBEToggle<CR>
 let g:miniBufExplSplitBelow=0
 " Visually select the text that was last edited/pasted
 noremap <leader>v `[v`]
@@ -241,3 +240,5 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 
 " 256 color mode
 set t_Co=256 
+
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
