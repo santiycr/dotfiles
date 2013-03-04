@@ -11,8 +11,6 @@ fi
 
 # create a new session, named $SESSION, and detach from it
 tmux new-session -d -s $SESSION
-tmux set-window-option -t $SESSION:0 automatic-rename off
-tmux rename-window -t $SESSION:0 Workspace
 
 tmux send -t 0 'cds'
 tmux send -t 0 'Enter'
@@ -32,6 +30,17 @@ tmux selectp -t 0                                # Select pane 0
 tmux new-window                                  # New window
 tmux send -t 0 'cd ~/SauceLabs/tests'
 tmux send -t 0 'Enter'
+tmux new-window                                  # New window
+tmux send -t 0 'cd ~/Dev/selenium'
+tmux send -t 0 'Enter'
 tmux select-window -t 0
+
+tmux set-window-option -g automatic-rename on
+tmux set-window-option -t $SESSION:0 automatic-rename off
+tmux rename-window -t $SESSION:0 Sauce
+tmux set-window-option -t $SESSION:1 automatic-rename off
+tmux rename-window -t $SESSION:1 Tests
+tmux set-window-option -t $SESSION:2 automatic-rename off
+tmux rename-window -t $SESSION:2 Selenium
 
 tmux attach-session -d -t $SESSION
