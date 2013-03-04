@@ -45,6 +45,7 @@ for install in installs:
     elif install == 'tmux':
         safe_ln('tmux/tmux.conf', '.tmux.conf')
         safe_ln('tmux/tmux.osx.conf', '.tmux.osx.conf')
+        safe_ln('tmux/tmux-powerlinerc', '.tmux-powerlinerc')
     elif install == 'zsh':
         safe_ln('zsh/zshrc', '.zshrc')
         os.system("chsh -s /bin/zsh")
