@@ -61,6 +61,10 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_enable_balloons = 0
 au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 
+" taglist tweaks
+let Tlist_Use_Right_Window = 1
+nnoremap <leader>t :TlistToggle<CR>
+
 " json tweaks
 au BufNewFile,BufReadPost *.json set filetype=json
 

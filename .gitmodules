@@ -82,3 +82,6 @@
 [submodule "tmux/tmux-powerline"]
 	path = tmux/tmux-powerline
 	url = git://github.com/erikw/tmux-powerline.git
+[submodule "vim/bundle/taglist.vim"]
+	path = vim/bundle/taglist.vim
+	url = git://github.com/vim-scripts/taglist.vim.git
