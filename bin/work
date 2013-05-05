@@ -12,35 +12,43 @@ fi
 # create a new session, named $SESSION, and detach from it
 tmux new-session -d -s $SESSION
 
+tmux send -t 0 'zstyle ":prezto:module:terminal" auto-title "no"'
+tmux send -t 0 'Enter'
 tmux send -t 0 'cds'
 tmux send -t 0 'Enter'
 tmux selectp -t 0                                # Select pane 0
 tmux splitw -h -p 50 # Split pane 0 vertically and give it 40%
+tmux send -t 1 'zstyle ":prezto:module:terminal" auto-title "no"'
+tmux send -t 1 'Enter'
 tmux send -t 1 'drip'
 tmux send -t 1 'Enter'
 tmux selectp -t 1                                # Select pane 1
 tmux splitw -v -p 90 # Split pane 1 horizontally, keep 10%
+tmux send -t 2 'zstyle ":prezto:module:terminal" auto-title "no"'
+tmux send -t 2 'Enter'
 tmux send -t 2 'velour'
 tmux send -t 2 'Enter'
 tmux selectp -t 2                                # Select pane 2
 tmux splitw -v -p 88 # Split pane 2 horizontally, keep 10%
+tmux send -t 3 'zstyle ":prezto:module:terminal" auto-title "no"'
+tmux send -t 3 'Enter'
 tmux send -t 3 'ssh sso.dev.saucelabs.com'
 tmux send -t 3 'Enter'
-tmux selectp -t 0                                # Select pane 0
 tmux new-window                                  # New window
+tmux send -t 0 'zstyle ":prezto:module:terminal" auto-title "no"'
+tmux send -t 0 'Enter'
 tmux send -t 0 'cd ~/SauceLabs/tests'
 tmux send -t 0 'Enter'
 tmux new-window                                  # New window
+tmux send -t 0 'zstyle ":prezto:module:terminal" auto-title "no"'
+tmux send -t 0 'Enter'
 tmux send -t 0 'cd ~/Dev/selenium'
 tmux send -t 0 'Enter'
 tmux select-window -t 0
 
-tmux set-window-option -g automatic-rename on
-tmux set-window-option -t $SESSION:0 automatic-rename off
+sleep 5
 tmux rename-window -t $SESSION:0 Sauce
-tmux set-window-option -t $SESSION:1 automatic-rename off
 tmux rename-window -t $SESSION:1 Tests
-tmux set-window-option -t $SESSION:2 automatic-rename off
 tmux rename-window -t $SESSION:2 Selenium
 
 tmux attach-session -d -t $SESSION
