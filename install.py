@@ -47,7 +47,15 @@ for install in installs:
         safe_ln('tmux/tmux.osx.conf', '.tmux.osx.conf')
         safe_ln('tmux/tmux-powerlinerc', '.tmux-powerlinerc')
     elif install == 'zsh':
-        safe_ln('zsh/zshrc', '.zshrc')
+        safe_ln('zsh/prezto', '.zprezto')
+        safe_ln('zsh/prezto/runcoms/zshrc', '.zshrc')
+        safe_ln('zsh/prezto/runcoms/zshenv', '.zshenv')
+        safe_ln('zsh/prezto/runcoms/zlogin', '.zlogin')
+        safe_ln('zsh/prezto/runcoms/zlogout', '.zlogout')
+        safe_ln('zsh/prezto/runcoms/zprofile', '.zprofile')
+        safe_ln('zsh/zpreztorc', '.zpreztorc')
+        os.system("cd %s/zsh/prezto; git submodule init; git submodule update; cd -"
+                  % DOTFILES_PATH)
         os.system("chsh -s /bin/zsh")
     elif install == 'git':
         safe_ln('git/gitconfig', '.gitconfig')

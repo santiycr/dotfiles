@@ -1,0 +1,162 @@
+#
+# Sets Prezto options.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+#
+# General
+#
+
+# Set case-sensitivity for completion, history lookup, etc.
+zstyle ':prezto:*:*' case-sensitive 'no'
+
+# Color output (auto set to 'no' on dumb terminals).
+zstyle ':prezto:*:*' color 'yes'
+
+# Set the Zsh modules to load (man zshmodules).
+# zstyle ':prezto:load' zmodule 'attr' 'stat'
+
+# Set the Zsh functions to load (man zshcontrib).
+# zstyle ':prezto:load' zfunction 'zargs' 'zmv'
+
+# Set the Prezto modules to load (browse modules).
+# The order matters.
+zstyle ':prezto:load' pmodule \
+  'archive' \
+  'environment' \
+  'terminal' \
+  'editor' \
+  'node' \
+  'git' \
+  'python' \
+  'osx' \
+  'history' \
+  'directory' \
+  'spectrum' \
+  'utility' \
+  'completion' \
+  'ssh-agent' \
+  'zaw' \
+  'syntax-highlighting' \
+  'prompt'
+
+#
+# Editor
+#
+
+# Set the key mapping style to 'emacs' or 'vi'.
+zstyle ':prezto:module:editor' keymap 'vi'
+
+# Auto convert .... to ../..
+zstyle ':prezto:module:editor' dot-expansion 'yes'
+
+#
+# Git
+#
+
+# Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
+zstyle ':prezto:module:git:status:ignore' submodules 'all'
+
+#
+# GNU Utility
+#
+
+# Set the command prefix on non-GNU systems.
+# zstyle ':prezto:module:gnu-utility' prefix 'g'
+
+#
+# Pacman
+#
+
+# Set the Pacman frontend.
+# zstyle ':prezto:module:pacman' frontend 'yaourt'
+
+#
+# Prompt
+#
+
+# Set the prompt theme to load.
+# Setting it to 'random' loads a random theme.
+# Auto set to 'off' on dumb terminals.
+zstyle ':prezto:module:prompt' theme 'santiycr'
+
+#
+# Screen
+#
+
+# Auto start a session when Zsh is launched.
+# zstyle ':prezto:module:screen' auto-start 'yes'
+
+#
+# GPG-Agent
+#
+
+# Enable SSH-Agent protocol emulation.
+# zstyle ':prezto:module:gpg-agent' ssh-support 'yes'
+
+#
+# SSH-Agent
+#
+
+# Enable ssh-agent forwarding.
+zstyle ':prezto:module:ssh-agent' forwarding 'yes'
+
+# Set ssh-agent identities to load.
+zstyle ':prezto:module:ssh-agent' identities 'id_rsa' 'id_rsa2' 'id_github'
+
+#
+# Syntax Highlighting
+#
+
+# Set syntax highlighters.
+# By default main, brackets, and cursor are enabled.
+# zstyle ':prezto:module:syntax-highlighting' highlighters \
+#   'main' \
+#   'brackets' \
+#   'pattern' \
+#   'cursor' \
+#   'root'
+
+#
+# Terminal
+#
+
+# Auto set the tab and window titles.
+zstyle ':prezto:module:terminal' auto-title 'yes'
+
+#
+# Tmux
+#
+
+# Auto start a session when Zsh is launched.
+# zstyle ':prezto:module:tmux' auto-start 'yes'
+
+#Nodepath
+export NODE_PATH=/usr/local/lib/node
+
+# Path setups
+export PATH=$HOME/bin:$HOME/.venvburrito/bin:$HOME/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:$PATH:/usr/local/share/npm/bin
+if [ -e $HOME/.venvburrito/startup.sh ]; then
+    source $HOME/.venvburrito/startup.sh
+fi
+
+# Custom setups
+if [ -e $HOME/setenv.sh ]; then
+    . $HOME/setenv.sh
+fi
+
+# use MacVim if avail instead of term vim
+if which mvim &> /dev/null; then
+    alias vim="mvim"
+    alias vimdiff="mvimdiff"
+    # Use macvim for git commit messages
+    export EDITOR='mvim -f -c "au VimLeave * !open -a iTerm"'
+else
+    export EDITOR='vim'
+fi
+bindkey '\e.' insert-last-word  
+
+# load RVM into a shell session.
+[[ -s "/Users/sso/.rvm/scripts/rvm" ]] && source "/Users/sso/.rvm/scripts/rvm" 
