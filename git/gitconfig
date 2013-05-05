@@ -1,24 +1,25 @@
 [user]
-	name = Santiago Suarez Ordoñez
-	email = santiycr@gmail.com
+  name = Santiago Suarez Ordoñez
+  email = santiycr@gmail.com
 [color]
-	diff = auto
-	status = auto
-	branch = auto
-        interactive = auto
-	ui = true
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
 [alias]
-	co = checkout
-	st = status
-	ci = commit
-        re = rebase
-        fe = fetch
+  co = checkout
+  st = status
+  ci = commit
+  re = rebase
+  fe = fetch
 [push]
-	default = current
+  default = current
 [apply]
-	whitespace = nowarn
+  whitespace = nowarn
 [github]
-	user = santiycr
-        password = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
+  user = santiycr
+  password = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
 [core]
-	autocrlf = input
+  autocrlf = input
+  editor = vim
