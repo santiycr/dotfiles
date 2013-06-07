@@ -144,6 +144,9 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 
 au BufEnter *.mako set syntax=mako
 
+" Go syntax
+au BufEnter *.go set syntax=go
+
 " Pydiction
 let g:pydiction_location = '~/.vim/vimfiles/ftplugin/pydiction/complete-dict'
 

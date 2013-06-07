@@ -82,3 +82,6 @@
 [submodule "zsh/prezto"]
 	path = zsh/prezto
 	url = git@github.com:santiycr/prezto.git
+[submodule "vim/bundle/vim-markdown-preview"]
+	path = vim/bundle/vim-markdown-preview
+	url = git://github.com/nelstrom/vim-markdown-preview.git

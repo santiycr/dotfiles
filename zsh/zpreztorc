@@ -40,6 +40,7 @@ zstyle ':prezto:load' pmodule \
   'ssh-agent' \
   'zaw' \
   'syntax-highlighting' \
+  'history-substring-search' \
   'prompt'
 
 #
@@ -125,6 +126,13 @@ zstyle ':prezto:module:ssh-agent' identities 'id_rsa' 'id_rsa2' 'id_github'
 
 # Auto set the tab and window titles.
 zstyle ':prezto:module:terminal' auto-title 'yes'
+
+
+#
+# Zaw
+#
+
+zstyle ':prezto:module:zaw' default-history-search 'yes'
 
 #
 # Tmux
