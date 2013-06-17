@@ -95,7 +95,7 @@ zstyle ':prezto:module:prompt' theme 'santiycr'
 #
 
 # Enable SSH-Agent protocol emulation.
-# zstyle ':prezto:module:gpg-agent' ssh-support 'yes'
+zstyle ':prezto:module:gpg-agent' ssh-support 'yes'
 
 #
 # SSH-Agent
@@ -164,7 +164,7 @@ if which mvim &> /dev/null; then
 else
     export EDITOR='vim'
 fi
-bindkey '\e.' insert-last-word  
+bindkey '\e.' insert-last-word
 
 # load RVM into a shell session.
-[[ -s "/Users/sso/.rvm/scripts/rvm" ]] && source "/Users/sso/.rvm/scripts/rvm" 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
