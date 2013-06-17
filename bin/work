@@ -2,7 +2,7 @@ SESSION=Sauce
 
 tmux start-server
 # if the session is already running, just attach to it.
-tmux has-session -t $SESSION
+tmux has-session -t $SESSION 1&>2 > /dev/null
 if [ $? -eq 0 ]; then
 	echo "Session $SESSION already exists. Attaching."
 	tmux attach -t $SESSION
@@ -12,43 +12,28 @@ fi
 # create a new session, named $SESSION, and detach from it
 tmux new-session -d -s $SESSION
 
-tmux send -t 0 'zstyle ":prezto:module:terminal" auto-title "no"'
-tmux send -t 0 'Enter'
 tmux send -t 0 'cds'
 tmux send -t 0 'Enter'
 tmux selectp -t 0                                # Select pane 0
 tmux splitw -h -p 50 # Split pane 0 vertically and give it 40%
-tmux send -t 1 'zstyle ":prezto:module:terminal" auto-title "no"'
-tmux send -t 1 'Enter'
 tmux send -t 1 'drip'
 tmux send -t 1 'Enter'
 tmux selectp -t 1                                # Select pane 1
 tmux splitw -v -p 90 # Split pane 1 horizontally, keep 10%
-tmux send -t 2 'zstyle ":prezto:module:terminal" auto-title "no"'
-tmux send -t 2 'Enter'
 tmux send -t 2 'velour'
 tmux send -t 2 'Enter'
 tmux selectp -t 2                                # Select pane 2
 tmux splitw -v -p 88 # Split pane 2 horizontally, keep 10%
-tmux send -t 3 'zstyle ":prezto:module:terminal" auto-title "no"'
-tmux send -t 3 'Enter'
 tmux send -t 3 'ssh sso.dev.saucelabs.com'
 tmux send -t 3 'Enter'
 tmux new-window                                  # New window
-tmux send -t 0 'zstyle ":prezto:module:terminal" auto-title "no"'
-tmux send -t 0 'Enter'
-tmux send -t 0 'cd ~/SauceLabs/tests'
+tmux send -t 0 'cdt'
 tmux send -t 0 'Enter'
 tmux new-window                                  # New window
-tmux send -t 0 'zstyle ":prezto:module:terminal" auto-title "no"'
-tmux send -t 0 'Enter'
 tmux send -t 0 'cd ~/Dev/selenium'
 tmux send -t 0 'Enter'
-tmux select-window -t 0
 
-sleep 5
-tmux rename-window -t $SESSION:0 Sauce
-tmux rename-window -t $SESSION:1 Tests
-tmux rename-window -t $SESSION:2 Selenium
+tmux select-window -t 0
+tmux selectp -t 0                                # Go back to pane 0
 
 tmux attach-session -d -t $SESSION
