@@ -154,14 +154,10 @@ if [ -e $HOME/setenv.sh ]; then
 fi
 
 # use MacVim if avail instead of term vim
-if which mvim &> /dev/null; then
-    alias vim="mvim"
-    alias vimdiff="mvimdiff"
-    # Use macvim for git commit messages
-    export EDITOR='mvim -f -c "au VimLeave * !open -a iTerm"'
-else
-    export EDITOR='vim'
-fi
+alias vim="vim -g"
+alias vimdiff="vimdiff -g"
+export VISUAL=vim
+export EDITOR=vi
 bindkey '\e.' insert-last-word
 
 # load RVM into a shell session.
