@@ -157,8 +157,6 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 
-au BufEnter *.mako set syntax=mako
-
 " Go syntax
 au BufEnter *.go set syntax=go
 
