@@ -157,9 +157,6 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 
-" Go syntax
-au BufEnter *.go set syntax=go
-
 " Pydiction
 let g:pydiction_location = '~/.vim/vimfiles/ftplugin/pydiction/complete-dict'
 

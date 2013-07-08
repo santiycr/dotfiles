@@ -97,3 +97,9 @@
 [submodule "vim/bundle/vim-bundle-mako"]
 	path = vim/bundle/vim-bundle-mako
 	url = https://github.com/sophacles/vim-bundle-mako.git
+[submodule "vim/bundle/vim-golang"]
+	path = vim/bundle/vim-golang
+	url = https://github.com/jnwhiteh/vim-golang.git
+[submodule "vim/bundle/vim-coffee-script"]
+	path = vim/bundle/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git
