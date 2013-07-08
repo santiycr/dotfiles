@@ -52,7 +52,7 @@ let g:airline_enable_fugitive=1
 let g:airline_enable_syntastic=1
 let g:airline_theme='badwolf'
 let g:airline_powerline_fonts=1
-let g:airline_exclude_filenames = ['DebuggerWatch', 'DebuggerStack', 'DebuggerStatus', 'GoToFile']
+let g:airline_exclude_filenames = ['DebuggerWatch', 'DebuggerStack', 'DebuggerStatus', 'GoToFile', '__Tag_List__']
 let g:bufferline_echo=0
 
 " Better Completion
