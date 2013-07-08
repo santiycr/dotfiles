@@ -36,6 +36,10 @@ set title
 set linebreak
 set cursorline
 set colorcolumn=+1
+set tabpagemax=50
+
+set ttimeout
+set ttimeoutlen=50
 
 " scrolling
 set scrolloff=3
@@ -44,6 +48,12 @@ set sidescrolloff=10
 
 "Set font type and size. Depends on the resolution. Larger screens, prefer h20
 set guifont=Inconsolata\ for\ Powerline:h16
+let g:airline_enable_fugitive=1
+let g:airline_enable_syntastic=1
+let g:airline_theme='badwolf'
+let g:airline_powerline_fonts=1
+let g:airline_exclude_filenames = ['DebuggerWatch', 'DebuggerStack', 'DebuggerStatus', 'GoToFile']
+let g:bufferline_echo=0
 
 " Better Completion
 set completeopt=longest,menuone,preview
@@ -62,8 +72,14 @@ let g:syntastic_enable_balloons = 0
 au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 
 " taglist tweaks
-let Tlist_Use_Right_Window = 1
 nnoremap <leader>t :TlistToggle<CR>
+let Tlist_Auto_Open = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_WinWidth = 40
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Compact_Format = 1
+let Tlist_Enable_Fold_Column = 0
+let Tlist_File_Fold_Auto_Close = 1
 
 " json tweaks
 au BufNewFile,BufReadPost *.json set filetype=json
@@ -82,8 +98,6 @@ set shiftwidth=4
 au BufNewFile,BufReadPost *.css,*.html,*.mako,*.rb,*.erb,*.coffee,*.js,*.json set shiftwidth=2
 
 " other visuals
-" Wildmenu
-
 set wildmenu
 set wildmode=list:longest
 set wildignore+=.hg,.git,.svn                    " Version control
@@ -121,6 +135,7 @@ syn spell toplevel
 
 " Automatically reload vimrc
 autocmd! bufwritepost vimrc source ~/.vimrc
+nnoremap Y y$
 
 " Backups
 set undodir=~/.vim/tmp/undo//     " undo files
@@ -157,9 +172,6 @@ abbreviate lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed d
 nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>
 " Gundo.vim window
 nnoremap <leader>u :GundoToggle<CR>
-" MiniBufferExplorer
-nnoremap <leader>b :MBEToggle<CR>
-let g:miniBufExplSplitBelow=0
 " Visually select the text that was last edited/pasted
 noremap <leader>v `[v`]
 " Alphabetically sort CSS properties in file with :SortCSS
