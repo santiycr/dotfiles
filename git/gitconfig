@@ -14,7 +14,7 @@
   re = rebase
   fe = fetch
 [push]
-  default = current
+  default = upstream
 [apply]
   whitespace = nowarn
 [github]
