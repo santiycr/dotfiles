@@ -50,8 +50,8 @@ set sidescrolloff=10
 set guifont=Inconsolata\ for\ Powerline:h16
 let g:airline_enable_fugitive=1
 let g:airline_enable_syntastic=1
-let g:airline_theme='badwolf'
 let g:airline_powerline_fonts=1
+let g:airline_theme='solarized'
 let g:airline_exclude_filenames = ['DebuggerWatch', 'DebuggerStack', 'DebuggerStatus', 'GoToFile', '__Tag_List__']
 let g:bufferline_echo=0
 
@@ -80,6 +80,9 @@ let Tlist_Exit_OnlyWindow = 1
 let Tlist_Compact_Format = 1
 let Tlist_Enable_Fold_Column = 0
 let Tlist_File_Fold_Auto_Close = 1
+
+" CtrlP
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " json tweaks
 au BufNewFile,BufReadPost *.json set filetype=json
@@ -176,9 +179,6 @@ nnoremap <leader>i :set list!<cr>
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 " Ack for the last search.
 nnoremap <silent> <leader>ack :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
-" Yankring
-nnoremap <silent> <leader>y :YRShow<CR> 
-let g:yankring_history_dir = '~/.vim/tmp'
 
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
@@ -206,10 +206,6 @@ if has('gui_running')
         " Full screen means FULL screen
         set fuoptions=maxvert,maxhorz
 
-        " CommandT
-        macmenu &File.New\ Tab key=<nop>
-        map <D-t> :CommandT<CR>
-        let g:CommandTMaxHeight = 20
         " free up Command-F and toggle fullscreen mode
         macmenu &Edit.Find.Find\.\.\. key=<nop>
         map <D-f> :set invfu<CR>
