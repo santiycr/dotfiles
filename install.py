@@ -5,67 +5,123 @@ import os
 import shutil
 import subprocess
 
-DOTFILES_PATH = os.path.dirname(os.path.realpath(__file__))
-HOME_PATH = os.environ['HOME']
+
+class Installation(object):
+    """ Specific installations subclass this class and define:
+        - other installations they depend on
+        - a set of steps the installation is compossed of """
+
+    NAME = "REDEFINE"
+    DEPENDENCIES = []
+
+    def __init__(self):
+        self.DOTFILES_PATH = os.path.dirname(os.path.realpath(__file__))
+        self.HOME_PATH = os.environ['HOME']
+
+    def safe_ln(self, source, dest):
+        source = "%s/%s" % (self.DOTFILES_PATH, source)
+        dest = "%s/%s" % (self.HOME_PATH, dest)
+        if os.path.islink(dest):
+            print("Existing link in %s to %s found. Unlinking."
+                  % (dest, os.path.realpath(dest)))
+            os.unlink(dest)
+        elif os.path.isfile(dest) or os.path.isdir(dest):
+            print "Already existing config found. Moving up to %s.orig" % dest
+            shutil.move(dest, dest + ".orig")
+        os.symlink(source, dest)
+
+    def safe_mkdir(self, dest):
+        dest = "%s/%s" % (self.HOME_PATH, dest)
+        if not os.path.isdir(dest):
+            os.mkdir(dest)
+
+    def run(self, already_installed):
+        print 'Installing %s' % self.NAME
+        for dependency in self.DEPENDENCIES:
+            if dependency in already_installed:
+                continue
+            for installation in find_installations(dependency):
+                installation().run(already_installed)
+        self.steps()
+        already_installed.append(self.NAME)
+
+    def steps(self):
+        """ installation subclasses need to define their own steps method """
+        print "steps method hasn't been defined! Broken installation"
 
 
-def safe_ln(source, dest):
-    source = "%s/%s" % (DOTFILES_PATH, source)
-    dest = "%s/%s" % (HOME_PATH, dest)
-    if os.path.islink(dest):
-        print ("Existing link in %s to %s found. Unlinking."
-               % (dest, os.path.realpath(dest)))
-        os.unlink(dest)
-    elif os.path.isfile(dest) or os.path.isdir(dest):
-        print "Already existing config found. Moving up to %s.orig" % dest
-        shutil.move(dest, dest + ".orig")
-    os.symlink(source, dest)
+class DotfilesInstallation(Installation):
+    NAME = "dotfiles"
+
+    def steps(self):
+        os.system('cd %s;'
+                  'git submodule init;'
+                  'git submodule update;'
+                  'cd -;'
+                  % self.DOTFILES_PATH)
+        os.system('cd %s/zsh/prezto;'
+                  'git submodule init;'
+                  'git submodule update;'
+                  'cd -;'
+                  % self.DOTFILES_PATH)
 
 
-def safe_mkdir(dest):
-    dest = "%s/%s" % (HOME_PATH, dest)
-    if not os.path.isdir(dest):
-        os.mkdir(dest)
+class VimInstallation(Installation):
+    NAME = "vim"
+    DEPENDENCIES = ['dotfiles', 'lint']
+
+    def steps(self):
+        self.safe_ln('vim/vimrc', '.vimrc')
+        self.safe_ln('vim/vimrc', '.gvimrc')
+        self.safe_ln('vim', '.vim')
+        self.safe_mkdir(".vim/tmp")
+        self.safe_mkdir(".vim/tmp/swap")
+        self.safe_mkdir(".vim/tmp/undo")
+        self.safe_mkdir(".vim/tmp/backup")
 
 
-installs = sys.argv[1:]
-if installs == ['all']:
-    installs = ['dotfiles', 'vim', 'tmux', 'zsh', 'git', 'lint', 'bin']
+class TmuxInstallation(Installation):
+    NAME = "tmux"
 
-for install in installs:
-    print "installing %s" % install
-    if install == 'vim':
-        safe_ln('vim/vimrc', '.vimrc')
-        safe_ln('vim/vimrc', '.gvimrc')
-        safe_ln('vim', '.vim')
-        safe_mkdir(".vim/tmp")
-        safe_mkdir(".vim/tmp/swap")
-        safe_mkdir(".vim/tmp/undo")
-        safe_mkdir(".vim/tmp/backup")
-    elif install == 'tmux':
-        safe_ln('tmux/tmux.conf', '.tmux.conf')
-        safe_ln('tmux/tmux.osx.conf', '.tmux.osx.conf')
-        safe_ln('tmux/tmux-powerlinerc', '.tmux-powerlinerc')
-    elif install == 'zsh':
-        safe_ln('zsh/prezto', '.zprezto')
-        safe_ln('zsh/prezto/runcoms/zshrc', '.zshrc')
-        safe_ln('zsh/prezto/runcoms/zshenv', '.zshenv')
-        safe_ln('zsh/prezto/runcoms/zlogin', '.zlogin')
-        safe_ln('zsh/prezto/runcoms/zlogout', '.zlogout')
-        safe_ln('zsh/prezto/runcoms/zprofile', '.zprofile')
-        safe_ln('zsh/zpreztorc', '.zpreztorc')
-        os.system("cd %s/zsh/prezto; git submodule init; git submodule update; cd -"
-                  % DOTFILES_PATH)
-        os.system("chsh -s /bin/zsh")
-    elif install == 'git':
-        safe_ln('git/gitconfig', '.gitconfig')
-    elif install == 'bin':
-        safe_mkdir("bin")
-        for script in os.listdir(DOTFILES_PATH + '/bin'):
-            safe_ln('bin/' + script, 'bin/' + os.path.basename(script))
-    elif install == 'dotfiles':
-        os.system("cd %s; git submodule init; git submodule update" % DOTFILES_PATH)
-    elif install == 'lint':
+    def steps(self):
+        self.safe_ln('tmux/tmux.conf', '.tmux.conf')
+
+
+class ZshInstallation(Installation):
+    NAME = "zsh"
+    DEPENDENCIES = ['dotfiles']
+
+    def steps(self):
+        self.safe_ln('zsh/prezto', '.zprezto')
+        self.safe_ln('zsh/prezto/runcoms/zshrc', '.zshrc')
+        self.safe_ln('zsh/prezto/runcoms/zshenv', '.zshenv')
+        self.safe_ln('zsh/prezto/runcoms/zlogin', '.zlogin')
+        self.safe_ln('zsh/prezto/runcoms/zlogout', '.zlogout')
+        self.safe_ln('zsh/prezto/runcoms/zprofile', '.zprofile')
+        self.safe_ln('zsh/zpreztorc', '.zpreztorc')
+        os.system('chsh -s /bin/zsh')
+
+
+class GitInstallation(Installation):
+    NAME = 'git'
+
+    def steps(self):
+        self.safe_ln('git/gitconfig', '.gitconfig')
+
+
+class BinInstallation(Installation):
+    NAME = 'bin'
+
+    def steps(self):
+        self.safe_mkdir("bin")
+        for script in os.listdir(self.DOTFILES_PATH + '/bin'):
+            self.safe_ln('bin/' + script, 'bin/' + os.path.basename(script))
+
+
+class LintInstallation(Installation):
+    NAME = 'lint'
+
+    def steps(self):
         with open(os.devnull, "w") as devnull:
 
             for lint in ['pep8', 'flake8']:
@@ -80,7 +136,29 @@ for install in installs:
                                    stdout=devnull, stderr=devnull):
                     print "WARNING: No %s binary found in path" % lint
 
-        safe_ln('lint/pep8', '.pep8')
-        safe_ln('lint/jshintrc', '.jshintrc')
-    else:
-        print "Invalid install requested: %s" % install
+        self.safe_ln('lint/pep8', '.pep8')
+        self.safe_ln('lint/jshintrc', '.jshintrc')
+
+
+def find_installations(name):
+    installations = []
+    for installation in [c for n, c in globals().items()
+                         if 'steps' in dir(c) and
+                         Installation in c.mro() and
+                         c != Installation]:
+        if name == 'all' or installation.NAME == name:
+            installations.append(installation)
+    if installations:
+        return installations
+    print "Invalid installtion requested: %s" % name
+    sys.exit(1)
+
+
+if __name__ == "__main__":
+    installs = sys.argv[1:]
+
+    already_installed = []
+    for install in installs:
+        for installation in find_installations(install):
+            if installation.NAME not in already_installed:
+                installation().run(already_installed)
