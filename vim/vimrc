@@ -1,7 +1,44 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 filetype off
-call pathogen#infect()
-call pathogen#helptags()
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+" Bundles
+Bundle 'bling/vim-airline'
+Bundle 'bling/vim-bufferline'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'sjl/gundo.vim'
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'myusuf3/numbers.vim'
+Bundle 'msanders/snipmate.vim'
+Bundle 'tristen/vim-sparkup'
+Bundle 'tsaleh/vim-supertab'
+Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-eunuch'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
+Bundle 'nelstrom/vim-markdown-preview'
+Bundle 'klen/python-mode'
+Bundle 'sophacles/vim-bundle-mako'
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'pangloss/vim-javascript'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'vim-scripts/vim-json-bundle'
+Bundle 'derekwyatt/vim-scala'
 
 filetype plugin indent on
 
@@ -130,7 +167,7 @@ set hlsearch
 " Press Space to turn off highlighting and clear any message already displayed.
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " Nice highlighting style
-:highlight Search gui=underline,bold guifg=#5f5faf guibg=#002b36 
+:highlight Search gui=underline,bold guifg=#5f5faf guibg=#002b36
 " Spellcheck with vim (set spell / set nospell)
 set dictionary=/usr/share/dict/words
 set spellfile=~/.vim/custom-dictionary.utf-8.add
@@ -249,6 +286,6 @@ let $JS_CMD='node'
 nnoremap <leader>n :NERDTreeToggle<CR>
 
 " 256 color mode
-set t_Co=256 
+set t_Co=256
 
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim

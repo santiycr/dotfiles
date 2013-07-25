@@ -74,10 +74,11 @@ class VimInstallation(Installation):
         self.safe_ln('vim/vimrc', '.vimrc')
         self.safe_ln('vim/vimrc', '.gvimrc')
         self.safe_ln('vim', '.vim')
-        self.safe_mkdir(".vim/tmp")
-        self.safe_mkdir(".vim/tmp/swap")
-        self.safe_mkdir(".vim/tmp/undo")
-        self.safe_mkdir(".vim/tmp/backup")
+        self.safe_mkdir('.vim/tmp')
+        self.safe_mkdir('.vim/tmp/swap')
+        self.safe_mkdir('.vim/tmp/undo')
+        self.safe_mkdir('.vim/tmp/backup')
+        os.system('vim +BundleInstall +qall')
 
 
 class TmuxInstallation(Installation):
