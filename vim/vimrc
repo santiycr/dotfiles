@@ -9,13 +9,13 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Bundles
-Bundle 'bling/vim-airline'
-Bundle 'bling/vim-bufferline'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'bling/vim-bufferline'
+Bundle 'bling/vim-airline'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'vim-scripts/taglist.vim'
+Bundle 'mbbill/undotree'
+Bundle 'majutsushi/tagbar'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'myusuf3/numbers.vim'
@@ -57,7 +57,6 @@ set backspace=indent,eol,start
 set number
 set laststatus=2
 set history=1000
-set undofile
 set undoreload=10000
 set shell=zsh
 set lazyredraw
@@ -88,9 +87,10 @@ set guifont=Inconsolata\ for\ Powerline:h16
 let g:airline_enable_fugitive=1
 let g:airline_enable_syntastic=1
 let g:airline_powerline_fonts=1
-let g:airline_theme='badwolf'
-let g:airline_exclude_filenames = ['DebuggerWatch', 'DebuggerStack', 'DebuggerStatus', 'GoToFile', '__Tag_List__']
+let g:airline_theme='solarized'
+let g:airline_exclude_filenames = ['DebuggerWatch', 'DebuggerStack', 'DebuggerStatus']
 let g:bufferline_echo=0
+
 
 " Better Completion
 set completeopt=longest,menuone,preview
@@ -106,23 +106,9 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_enable_balloons = 0
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-
-" taglist tweaks
-nnoremap <leader>t :TlistToggle<CR>
-let Tlist_Auto_Open = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 40
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Compact_Format = 1
-let Tlist_Enable_Fold_Column = 0
-let Tlist_File_Fold_Auto_Close = 1
 
 " CtrlP
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-
-" json tweaks
-au BufNewFile,BufReadPost *.json set filetype=json
 
 "Color scheme
 syntax enable
@@ -181,6 +167,7 @@ nnoremap Y y$
 set undodir=~/.vim/tmp/undo//     " undo files
 set backupdir=~/.vim/tmp/backup// " backups
 set directory=~/.vim/tmp/swap//   " swap files
+set undofile
 set backup                        " enable backups
 set noswapfile                    " It's 2012, Vim.
 
@@ -189,6 +176,7 @@ highlight BadWhitespace ctermbg=red guibg=red
 
 " Make trailing whitespace be flagged as bad.
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 " Delete trailing whitespace on saving py files
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -205,8 +193,10 @@ abbreviate pdbst import pdb;pdb.set_trace()
 abbreviate lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 " Remove whitespace on lines end
 nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>
-" Gundo.vim window
-nnoremap <leader>u :GundoToggle<CR>
+" Undotree window
+nnoremap <leader>u :UndotreeToggle<CR>
+" Tagbar window
+nnoremap <leader>t :TagbarToggle<CR>
 " Visually select the text that was last edited/pasted
 noremap <leader>v `[v`]
 " Alphabetically sort CSS properties in file with :SortCSS
@@ -287,5 +277,3 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 
 " 256 color mode
 set t_Co=256
-
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
