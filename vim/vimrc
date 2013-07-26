@@ -177,16 +177,6 @@ highlight BadWhitespace ctermbg=red guibg=red
 " Make trailing whitespace be flagged as bad.
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-" Delete trailing whitespace on saving py files
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-
-" Pydiction
-let g:pydiction_location = '~/.vim/vimfiles/ftplugin/pydiction/complete-dict'
 
 " shortcuts and abbreviations
 abbreviate pdbst import pdb;pdb.set_trace()
