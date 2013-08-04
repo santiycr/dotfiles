@@ -72,13 +72,14 @@ class VimInstallation(Installation):
 
     def steps(self):
         self.safe_ln('vim/vimrc', '.vimrc')
-        self.safe_ln('vim/vimrc', '.gvimrc')
         self.safe_ln('vim', '.vim')
         self.safe_mkdir('.vim/tmp')
         self.safe_mkdir('.vim/tmp/swap')
         self.safe_mkdir('.vim/tmp/undo')
         self.safe_mkdir('.vim/tmp/backup')
-        os.system('vim +BundleInstall +qall')
+        self.safe_mkdir('.vim/bundle')
+        os.system('git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim')
+        os.system('vim +NeoBundleInstall +qall')
 
 
 class TmuxInstallation(Installation):
