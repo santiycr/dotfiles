@@ -1,4 +1,4 @@
 vim/tmp/*
-vim/bundle/*
+vim/bundle
 vim/.netrwhist
 vim/doc
