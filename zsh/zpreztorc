@@ -155,11 +155,17 @@ if [ -e $HOME/setenv.sh ]; then
     . $HOME/setenv.sh
 fi
 
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -n "$SSH_CONNECTION" ]; then
+    VIMEXTRA=""
+else
+    VIMEXTRA="-g"
+fi
+
 # use MacVim if avail instead of term vim
-alias vim="vim -g"
-alias vimdiff="vimdiff -g"
+alias vim="vim $VIMEXTRA"
+alias vimdiff="vimdiff $VIMEXTRA"
 export VISUAL=vim
-export EDITOR=vi
+export EDITOR=vim
 bindkey '\e.' insert-last-word
 
 # load RVM into a shell session.
