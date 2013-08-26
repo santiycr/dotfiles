@@ -4,6 +4,7 @@ import sys
 import os
 import shutil
 import subprocess
+import platform
 
 
 class Installation(object):
@@ -34,6 +35,15 @@ class Installation(object):
         dest = "%s/%s" % (self.HOME_PATH, dest)
         if not os.path.isdir(dest):
             os.mkdir(dest)
+
+    def install(self, package):
+        if platform.system() == 'Darwin':
+            installer = 'brew install'
+        elif platform.system() == 'Linux':
+            installer = 'sudo apt-get install'
+        else:
+            raise Exception('SAYWHAA')
+        os.system("%s %s" % (installer, package))
 
     def run(self, already_installed):
         print 'Installing %s' % self.NAME
@@ -78,7 +88,8 @@ class VimInstallation(Installation):
         self.safe_mkdir('.vim/tmp/undo')
         self.safe_mkdir('.vim/tmp/backup')
         self.safe_mkdir('.vim/bundle')
-        os.system('git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim')
+        os.system('git clone git://github.com/Shougo/neobundle.vim'
+                  '~/.vim/bundle/neobundle.vim')
         os.system('vim +NeoBundleInstall +qall')
 
 
@@ -86,7 +97,10 @@ class TmuxInstallation(Installation):
     NAME = "tmux"
 
     def steps(self):
+        self.install('tmux')
+        os.system('sudo gem install tmuxinator')
         self.safe_ln('tmux/tmux.conf', '.tmux.conf')
+        self.safe_ln('tmux/tmuxinator', '.tmuxinator')
 
 
 class ZshInstallation(Installation):
