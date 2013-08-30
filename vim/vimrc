@@ -45,6 +45,7 @@ NeoBundle 'tpope/vim-haml'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'nelstrom/vim-markdown-preview'
 NeoBundle 'klen/python-mode'
+NeoBundle 'jmcantrell/vim-virtualenv'
 NeoBundle 'sophacles/vim-bundle-mako'
 NeoBundle 'jnwhiteh/vim-golang'
 NeoBundle 'pangloss/vim-javascript'
@@ -93,8 +94,6 @@ set sidescrolloff=10
 
 "Set font type and size. Depends on the resolution. Larger screens, prefer h20
 set guifont=Inconsolata\ for\ Powerline:h16
-let g:airline_enable_branch=1
-let g:airline_enable_syntastic=1
 let g:airline_powerline_fonts=1
 let g:airline_theme='solarized'
 let g:airline_exclude_filenames = ['DebuggerWatch', 'DebuggerStack', 'DebuggerStatus']
