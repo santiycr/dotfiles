@@ -38,6 +38,7 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'zaw' \
+  'tmux' \
   'syntax-highlighting' \
   'history-substring-search' \
   'prompt'
