@@ -21,7 +21,7 @@ windows:
       panes:
         - cds
         - drip
-        - sleep 5 ; velour
+        - velour
         - ssh sso.dev.saucelabs.com
   - tests:
       panes:
