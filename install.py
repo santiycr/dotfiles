@@ -89,7 +89,7 @@ class VimInstallation(Installation):
         self.safe_mkdir('.vim/tmp/backup')
         self.safe_mkdir('.vim/bundle')
         os.system('git clone git://github.com/Shougo/neobundle.vim'
-                  '~/.vim/bundle/neobundle.vim')
+                  ' ~/.vim/bundle/neobundle.vim')
         os.system('vim +NeoBundleInstall +qall')
 
 
