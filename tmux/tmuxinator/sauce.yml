@@ -22,7 +22,7 @@ windows:
         - cds
         - drip
         - velour
-        - ssh sso.dev.saucelabs.com
+        - ssh $DEV_SERVER
   - tests:
       panes:
         - cdt
