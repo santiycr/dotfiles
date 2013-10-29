@@ -169,7 +169,11 @@ alias vim="vim $VIMEXTRA"
 alias vimdiff="vimdiff $VIMEXTRA"
 export VISUAL=vim
 export EDITOR=vim
-bindkey '\e.' insert-last-word
 
 # load RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# Misc aliases
+alias git=hub
+alias tmsave='tmux save-buffer - | pbcopy'
+alias gtmsave='tmux save-buffer - | gist -p | pbcopy'

@@ -122,6 +122,7 @@ class GitInstallation(Installation):
     NAME = 'git'
 
     def steps(self):
+        self.install('hub')
         self.safe_ln('git/gitconfig', '.gitconfig')
 
 
