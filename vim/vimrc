@@ -52,6 +52,8 @@ NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'vim-scripts/vim-json-bundle'
 NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'rizzatti/funcoo.vim'
+NeoBundle 'rizzatti/dash.vim'
 
 filetype plugin indent on
 set encoding=utf8
@@ -118,6 +120,12 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_enable_balloons = 0
+
+" tagbar config
+let g:tagbar_autoshowtag = 1
+
+" Dash
+nmap <silent> <leader>d <Plug>DashSearch
 
 " CtrlP
 set runtimepath^=~/.vim/bundle/ctrlp.vim
