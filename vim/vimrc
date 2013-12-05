@@ -54,6 +54,7 @@ NeoBundle 'vim-scripts/vim-json-bundle'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'rizzatti/funcoo.vim'
 NeoBundle 'rizzatti/dash.vim'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 filetype plugin indent on
 set encoding=utf8
@@ -123,6 +124,10 @@ let g:syntastic_enable_balloons = 0
 
 " tagbar config
 let g:tagbar_autoshowtag = 1
+
+" Indent guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_color_change_percent = 2
 
 " Dash
 nmap <silent> <leader>d <Plug>DashSearch
