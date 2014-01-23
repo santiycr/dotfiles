@@ -36,14 +36,14 @@ class Installation(object):
         if not os.path.isdir(dest):
             os.mkdir(dest)
 
-    def install(self, package):
+    def install(self, package, extras=''):
         if platform.system() == 'Darwin':
             installer = 'brew install'
         elif platform.system() == 'Linux':
             installer = 'sudo apt-get install'
         else:
             raise Exception('SAYWHAA')
-        os.system("%s %s" % (installer, package))
+        os.system("%s %s %s" % (installer, extras, package))
 
     def run(self, already_installed):
         print 'Installing %s' % self.NAME
@@ -81,6 +81,8 @@ class VimInstallation(Installation):
     DEPENDENCIES = ['dotfiles', 'lint']
 
     def steps(self):
+        if platform.system() == 'Darwin':
+            self.install('macvim', '--override-system-vim')
         self.safe_ln('vim/vimrc', '.vimrc')
         self.safe_ln('vim', '.vim')
         self.safe_mkdir('.vim/tmp')
