@@ -93,12 +93,27 @@ class VimInstallation(Installation):
         os.system('vim +NeoBundleInstall +qall')
 
 
+class VirtualenvInstallation(Installation):
+    NAME = "virtualenv"
+    DEPENDENCIES = ['zsh']
+
+    def steps(self):
+        os.system('which mkvirtualenv || curl -s https://raw.github.com/brainsik/'
+                  'virtualenv-burrito/master/virtualenv-burrito.sh | $SHELL')
+
+
 class TmuxInstallation(Installation):
     NAME = "tmux"
+    DEPENDENCIES = ['virtualenv']
 
     def steps(self):
         self.install('tmux')
-        os.system('sudo gem install tmuxinator')
+        os.system('which gem && sudo gem install tmuxinator')
+        os.system('mkvirtualenv powerline; deactivate')
+        os.system('$HOME/.virtualenvs/powerline/bin/pip install'
+                  ' git+git://github.com/Lokaltog/powerline')
+        self.safe_mkdir('.config')
+        self.safe_ln('tmux/powerline', '.config/powerline')
         self.safe_ln('tmux/tmux.conf', '.tmux.conf')
         self.safe_ln('tmux/tmuxinator', '.tmuxinator')
 
