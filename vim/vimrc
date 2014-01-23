@@ -113,13 +113,15 @@ au VimResized * :wincmd =
 " python tweaks
 let g:pymode_folding = 0
 let g:pymode_rope = 1
-let g:pymode_lint = 0
+let g:pymode_rope_complete_on_dot = 1
+let g:pymode_lint = 1
+let g:pymode_lint_on_write = 0
+let g:pymode_lint_error_symbol = '✗'
+let g:pymode_lint_todo_symbol = '⚠'
 let g:pymode_virtualenv = 1
-let g:pymode_rope_goto_def_newwin = 'new'
-let g:pymode_rope_always_show_complete_menu = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_enable_balloons = 0
 
 " tagbar config
