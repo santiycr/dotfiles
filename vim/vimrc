@@ -22,8 +22,8 @@ NeoBundle 'Shougo/vimproc', {
 
 " Bundles
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'bling/vim-bufferline'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mbbill/undotree'
 NeoBundle 'majutsushi/tagbar'
@@ -55,6 +55,7 @@ NeoBundle 'rizzatti/funcoo.vim'
 NeoBundle 'rizzatti/dash.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'santiycr/grin.vim'
+NeoBundle 'Raimondi/delimitMate'
 
 filetype plugin indent on
 set encoding=utf8
@@ -90,6 +91,9 @@ set tabpagemax=50
 set ttimeout
 set ttimeoutlen=50
 
+" Remember vim status on close
+set viminfo='100,<1000,s100,%,:5
+
 " scrolling
 set scrolloff=3
 set sidescroll=1
@@ -98,11 +102,13 @@ set sidescrolloff=10
 "Set font type and size. Depends on the resolution. Larger screens, prefer h20
 set guifont=Inconsolata\ for\ Powerline:h16
 let g:airline_powerline_fonts=1
-let g:airline_theme='solarized'
+let g:airline_theme='molokai'
 let g:airline_exclude_filenames = ['DebuggerWatch', 'DebuggerStack', 'DebuggerStatus']
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:bufferline_echo=0
 set noshowmode
-
 
 " Better Completion
 set completeopt=longest,menuone,preview
@@ -123,6 +129,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_enable_balloons = 0
+" close preview window (used for docs) once insert is done
+autocmd InsertLeave * :pc 
 
 " tagbar config
 let g:tagbar_autoshowtag = 1
@@ -136,10 +144,10 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 " CtrlP
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_by_filename = 1
 
 "Color scheme
 syntax enable
-set background=dark
 colorscheme solarized
 
 " tabs and spaces
@@ -181,6 +189,7 @@ set hlsearch
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " Nice highlighting style
 :highlight Search gui=underline,bold guifg=#5f5faf guibg=#002b36
+
 " Spellcheck with vim (set spell / set nospell)
 set dictionary=/usr/share/dict/words
 set spellfile=~/.vim/custom-dictionary.utf-8.add
@@ -188,7 +197,11 @@ syn spell toplevel
 
 " Automatically reload vimrc
 autocmd! bufwritepost vimrc source ~/.vimrc
+
+" Other mappings
 nnoremap Y y$
+map <C-j> :bn<cr>
+map <C-k> :bp<cr>
 
 " Backups
 set undodir=~/.vim/tmp/undo//     " undo files
@@ -221,8 +234,8 @@ noremap <leader>v `[v`]
 " Toggle [i]nvisible characters
 nnoremap <leader>i :set list!<cr>
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-" Ack for the last search.
-nnoremap <silent> <leader>ack :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+" Grin for the last search.
+nnoremap <silent> <leader>grin :execute "GrinFromSearch!"<CR>
 
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
