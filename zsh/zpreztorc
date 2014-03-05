@@ -49,6 +49,8 @@ zstyle ':prezto:load' pmodule \
 
 # Set the key mapping style to 'emacs' or 'vi'.
 zstyle ':prezto:module:editor' key-bindings 'vi'
+# Fast esc
+export KEYTIMEOUT=1
 
 # Auto convert .... to ../..
 zstyle ':prezto:module:editor' dot-expansion 'yes'
@@ -85,19 +87,13 @@ zstyle ':prezto:module:git:info' verbose 'yes'
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'santiycr'
 
-#
-# Screen
-#
-
-# Auto start a session when Zsh is launched.
-# zstyle ':prezto:module:screen' auto-start 'yes'
 
 #
 # SSH
 #
 
 # Set the SSH identities to load into the agent.
-# zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa'
 
 #
 # Syntax Highlighting
@@ -132,6 +128,9 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 #
 
 zstyle ':prezto:module:zaw' default-history-search 'yes'
+bindkey '^F' zaw-open-file
+bindkey '^A' zaw-applications
+bindkey '^B' zaw-git-recent-branches
 
 #
 # Tmux
@@ -161,7 +160,7 @@ fi
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -n "$SSH_CONNECTION" ]; then
     VIMEXTRA=""
 else
-    VIMEXTRA="-g"
+    VIMEXTRA="-w ~/.vimlog -g"
 fi
 
 # use MacVim if avail instead of term vim
