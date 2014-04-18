@@ -19,13 +19,13 @@ windows:
   - sauce:
       layout: 0309,204x55,0,0{103x55,0,0,0,100x55,104,0[100x5,104,0,3,100x5,104,6,4,100x43,104,12,5]}
       panes:
-        - cds
+        - cds; clear
         - cds; ~/Dev/dklab_realsync/realsync
         - velour
         - ssh $DEV_SERVER
   - tests:
       panes:
-        - cdt
+        - cdt; clear
   - selenium: 
       panes:
-        - cd ~/Dev/selenium
+        - cd ~/Dev/selenium; clear
