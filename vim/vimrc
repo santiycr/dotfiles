@@ -21,7 +21,7 @@ NeoBundle 'Shougo/vimproc', {
             \ }
 
 " Bundles
-NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'kien/ctrlp.vim'
@@ -52,10 +52,12 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'vim-scripts/vim-json-bundle'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'rizzatti/funcoo.vim'
-NeoBundle 'rizzatti/dash.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'santiycr/grin.vim'
 NeoBundle 'Raimondi/delimitMate'
+if has("mac")
+    NeoBundle 'rizzatti/dash.vim'
+endif
 
 filetype plugin indent on
 set encoding=utf8
@@ -85,8 +87,12 @@ set shiftround
 set title
 set linebreak
 set cursorline
-set colorcolumn=+1
 set tabpagemax=50
+set noshowmode
+
+" Column highlight
+set colorcolumn=+1
+let &colorcolumn="+1,".join(range(120,999),",")
 
 set ttimeout
 set ttimeoutlen=50
@@ -101,14 +107,18 @@ set sidescrolloff=10
 
 "Set font type and size. Depends on the resolution. Larger screens, prefer h20
 set guifont=Inconsolata\ for\ Powerline:h16
+
+" Airline
 let g:airline_powerline_fonts=1
-let g:airline_theme='molokai'
+let g:airline_theme='solarized'
 let g:airline_exclude_filenames = ['DebuggerWatch', 'DebuggerStack', 'DebuggerStatus']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:bufferline_echo=0
-set noshowmode
 
 " Better Completion
 set completeopt=longest,menuone,preview
@@ -130,7 +140,7 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_enable_balloons = 0
 " close preview window (used for docs) once insert is done
-autocmd InsertLeave * :pc 
+autocmd InsertLeave * :pc
 
 " tagbar config
 let g:tagbar_autoshowtag = 1
@@ -149,6 +159,7 @@ let g:ctrlp_by_filename = 1
 "Color scheme
 syntax enable
 colorscheme solarized
+set background=dark
 
 " tabs and spaces
 set expandtab
@@ -185,10 +196,9 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
+
 " Press Space to turn off highlighting and clear any message already displayed.
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-" Nice highlighting style
-:highlight Search gui=underline,bold guifg=#5f5faf guibg=#002b36
 
 " Spellcheck with vim (set spell / set nospell)
 set dictionary=/usr/share/dict/words
@@ -304,9 +314,6 @@ let $JS_CMD='node'
 
 " nerdtree
 nnoremap <leader>n :NERDTreeToggle<CR>
-
-" 256 color mode
-set t_Co=256
 
 " Installation check.
 NeoBundleCheck
