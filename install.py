@@ -78,7 +78,7 @@ class DotfilesInstallation(Installation):
 
 class VimInstallation(Installation):
     NAME = "vim"
-    DEPENDENCIES = ['dotfiles', 'lint']
+    DEPENDENCIES = ['dotfiles', 'lint', 'git']
 
     def steps(self):
         if platform.system() == 'Darwin':
@@ -106,17 +106,15 @@ class VirtualenvInstallation(Installation):
 
 class TmuxInstallation(Installation):
     NAME = "tmux"
-    DEPENDENCIES = ['virtualenv']
+    DEPENDENCIES = ['git']
 
     def steps(self):
         self.install('tmux')
-        os.system('which gem && sudo gem install tmuxinator')
-        os.system('mkvirtualenv powerline; deactivate')
-        os.system('$HOME/.virtualenvs/powerline/bin/pip install'
-                  ' git+git://github.com/Lokaltog/powerline')
-        self.safe_mkdir('.config')
-        self.safe_ln('tmux/powerline', '.config/powerline')
         self.safe_ln('tmux/tmux.conf', '.tmux.conf')
+        self.safe_mkdir('.tmux/plugins')
+        os.system('git clone https://github.com/tmux-plugins/tpm'
+                  ' ~/.tmux/plugins/tpm')
+        os.system('which gem && sudo gem install tmuxinator')
         self.safe_ln('tmux/tmuxinator', '.tmuxinator')
 
 
