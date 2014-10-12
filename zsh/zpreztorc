@@ -145,9 +145,11 @@ zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
 #Nodepath
 export NODE_PATH=/usr/local/lib/node
+export NODE_PATH=$NODE_PATH:/usr/local/share/npm/lib/node_modules
 
 # Path setups
 export PATH=$HOME/bin:$HOME/.venvburrito/bin:$HOME/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:$PATH:/usr/local/share/npm/bin
+export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 if [ -e $HOME/.venvburrito/startup.sh ]; then
     source $HOME/.venvburrito/startup.sh
 fi
@@ -175,3 +177,4 @@ export EDITOR=vim
 # Misc aliases
 alias tmsave='tmux save-buffer - | pbcopy'
 alias gtmsave='tmux save-buffer - | gist -p | pbcopy'
+alias ppy='/Users/sso/.virtualenvs/py/bin/py'
