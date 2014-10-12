@@ -22,7 +22,7 @@ windows:
         - cds; clear
         - cds; ~/Dev/dklab_realsync/realsync
         - velour
-        - ssh $DEV_SERVER
+        - mosh --ssh="ssh -p 3422" -p 60000 $DEV_SERVER
   - tests:
       panes:
         - cdt; clear
