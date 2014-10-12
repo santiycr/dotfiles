@@ -141,6 +141,7 @@ class GitInstallation(Installation):
     def steps(self):
         self.install('hub')
         self.safe_ln('git/gitconfig', '.gitconfig')
+        self.safe_ln('git/gitignore', '.gitignore')
 
 
 class BinInstallation(Installation):
