@@ -55,8 +55,14 @@ NeoBundle 'rizzatti/funcoo.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'santiycr/grin.vim'
 NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'chrisbra/NrrwRgn'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'maxbrunsfeld/vim-yankstack'
+NeoBundle 'godlygeek/tabular'
+" NeoBundle 'editorconfig/editorconfig-vim'
 if has("mac")
     NeoBundle 'rizzatti/dash.vim'
+    set macmeta
 endif
 
 filetype plugin indent on
@@ -89,6 +95,7 @@ set linebreak
 set cursorline
 set tabpagemax=50
 set noshowmode
+let mapleader = ","
 
 " Column highlight
 set colorcolumn=+1
@@ -154,12 +161,14 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 " CtrlP
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_by_filename = 1
 
 "Color scheme
+let g:solarized_hitrail=1    "default value is 0
 syntax enable
-colorscheme solarized
 set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
+let g:solarized_menu=0
 
 " tabs and spaces
 set expandtab
@@ -266,7 +275,11 @@ if has('gui_running')
     set so=7
 
     " Different cursors for different modes.
-    set guicursor=n-v-c:blinkon0
+    highlight Cursor guifg=black guibg=green
+    highlight iCursor guifg=white guibg=steelblue
+    set guicursor=n-v-c:block-Cursor
+    set guicursor+=i:ver100-iCursor
+    set guicursor+=n-v-c:blinkon0
     set guicursor+=i:blinkwait10
 
     if has("gui_macvim")
@@ -314,6 +327,15 @@ let $JS_CMD='node'
 
 " nerdtree
 nnoremap <leader>n :NERDTreeToggle<CR>
+
+map s <Plug>(easymotion-s2)
+
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 " Installation check.
 NeoBundleCheck
