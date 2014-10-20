@@ -262,7 +262,7 @@ NeoBundle 'chrisbra/NrrwRgn'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'maxbrunsfeld/vim-yankstack'
 NeoBundle 'godlygeek/tabular'
-" NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'tommcdo/vim-exchange'
 if has("mac")
     NeoBundle 'rizzatti/dash.vim'
     set macmeta
