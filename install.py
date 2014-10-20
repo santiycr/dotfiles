@@ -111,9 +111,13 @@ class TmuxInstallation(Installation):
     def steps(self):
         self.install('tmux')
         self.safe_ln('tmux/tmux.conf', '.tmux.conf')
+        self.safe_mkdir('.tmux')
         self.safe_mkdir('.tmux/plugins')
         os.system('git clone https://github.com/tmux-plugins/tpm'
                   ' ~/.tmux/plugins/tpm')
+        os.system('tmux start-server; tmux new-session -d;'
+                  '%s/.tmux/plugins/tpm/scripts/install_plugins.sh'
+                  % self.HOME_PATH)
         os.system('which gem && sudo gem install tmuxinator')
         self.safe_ln('tmux/tmuxinator', '.tmuxinator')
 
