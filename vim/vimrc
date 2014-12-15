@@ -149,12 +149,8 @@ if has('gui_running')
     set foldenable
     set so=7
 
-    " Different cursors for different modes.
-    highlight Cursor guifg=black guibg=green
-    highlight iCursor guifg=white guibg=steelblue
-    set guicursor=n-v-c:block-Cursor
-    set guicursor+=i:ver100-iCursor
-    set guicursor+=n-v-c:blinkon0
+    " only blink the cursor on input mode
+    set guicursor=n-v-c:blinkon0
     set guicursor+=i:blinkwait10
 
     if has("gui_macvim")
@@ -263,6 +259,7 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'maxbrunsfeld/vim-yankstack'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'tommcdo/vim-exchange'
+NeoBundle 'sickill/vim-pasta'
 if has("mac")
     NeoBundle 'rizzatti/dash.vim'
     set macmeta
@@ -293,6 +290,7 @@ let g:pymode_virtualenv = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_enable_balloons = 0
+let g:pymode_indent = 1
 " close preview window (used for docs) once insert is done
 autocmd InsertLeave * :pc
 
