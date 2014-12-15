@@ -1,7 +1,6 @@
 " Note: Skip initialization for vim-tiny or vim-small.
 if !1 | finish | endif
 
-filetype plugin indent on
 set encoding=utf8
 set fileformat=unix
 set modelines=0
@@ -157,9 +156,7 @@ if has('gui_running')
         " Full screen means FULL screen
         set fuoptions=maxvert,maxhorz
 
-        " free up Command-F and toggle fullscreen mode
-        macmenu &Edit.Find.Find\.\.\. key=<nop>
-        map <D-f> :set invfu<CR>
+        map <D-Return> :set invfu<CR>
 
         " Use the normal HIG movements, except for M-Up/Down
         let macvim_skip_cmd_opt_movement = 1
@@ -265,6 +262,7 @@ if has("mac")
     set macmeta
 endif
 call neobundle#end()
+filetype plugin indent on " Keep below neobundle#end!!!
 
 " Airline
 let g:airline_powerline_fonts=1
