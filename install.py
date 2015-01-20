@@ -174,6 +174,8 @@ class LintInstallation(Installation):
                     print "WARNING: No %s binary found in path" % lint
 
         self.safe_ln('lint/pep8', '.pep8')
+        self.safe_mkdir('.config')
+        self.safe_ln('lint/flake8', '.config/flake8')
         self.safe_ln('lint/jshintrc', '.jshintrc')
 
 
