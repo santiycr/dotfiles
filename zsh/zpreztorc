@@ -159,17 +159,20 @@ if [ -e $HOME/setenv.sh ]; then
     . $HOME/setenv.sh
 fi
 
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -n "$SSH_CONNECTION" ]; then
-    VIMEXTRA=""
-else
-    VIMEXTRA="-w ~/.vimlog -g"
-fi
+
+#if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -n "$SSH_CONNECTION" ]; then
+#    VIMEXTRA=""
+#else
+#    VIMEXTRA="-w ~/.vimlog -g"
+#fi
 
 # use MacVim if avail instead of term vim
-alias vim="vim $VIMEXTRA"
-alias vimdiff="vimdiff $VIMEXTRA"
-export VISUAL=vim
-export EDITOR=vim
+alias vim=mvim
+alias vimdiff=mvimdiff
+
+export VISUAL=mvim
+export EDITOR=mvim
+
 
 # load RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
