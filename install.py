@@ -122,6 +122,15 @@ class TmuxInstallation(Installation):
         self.safe_ln('tmux/tmuxinator', '.tmuxinator')
 
 
+class OndirInstallation(Installation):
+    NAME = "ondir"
+    DEPENDENCIES = ['zsh']
+
+    def steps(self):
+        self.install('ondir')
+        self.safe_ln('ondirrc', '.ondirrc')
+
+
 class ZshInstallation(Installation):
     NAME = "zsh"
     DEPENDENCIES = ['dotfiles']

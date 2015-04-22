@@ -178,3 +178,9 @@ export EDITOR=vim
 alias tmsave='tmux save-buffer - | pbcopy'
 alias gtmsave='tmux save-buffer - | gist -p | pbcopy'
 alias ppy='/Users/sso/.virtualenvs/py/bin/py'
+
+# Make ondir work
+eval_ondir() {
+  eval "`ondir \"$OLDPWD\" \"$PWD\"`"
+}
+chpwd_functions=( eval_ondir $chpwd_functions )

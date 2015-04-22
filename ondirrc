@@ -1,0 +1,15 @@
+enter ~/SauceLabs/sauce
+  workon sauce
+  saucepath
+
+enter ~/SauceLabs/sauce-ansible
+  workon sauce-ansible
+
+enter ~/SauceLabs/tests
+  workon tests
+
+enter ~/SauceLabs/changelog
+  workon changelog
+
+leave ~/SauceLabs/tests:~/SauceLabs/sauce:~/SauceLabs/sauce-ansible:~/Saucelabs/changelog
+  deactivate > /dev/null 2>&1
