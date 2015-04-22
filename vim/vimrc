@@ -257,6 +257,8 @@ NeoBundle 'maxbrunsfeld/vim-yankstack'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'sickill/vim-pasta'
+NeoBundle 'tmux-plugins/vim-tmux'
+NeoBundle 'regedarek/ZoomWin'
 if has("mac")
     NeoBundle 'rizzatti/dash.vim'
     set macmeta
@@ -332,6 +334,8 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+
+nmap <unique> <c-w>z  <Plug>ZoomWin
 
 " Installation check.
 NeoBundleCheck
