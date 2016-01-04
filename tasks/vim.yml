@@ -1,0 +1,36 @@
+- name: install macvim if on mac
+  homebrew:
+    name: macvim
+    install_options: "--override-system-vim"
+    state: latest
+    update_homebrew: yes
+  when: ansible_os_family == 'Darwin'
+
+- name: manage vimrc file
+  copy:
+    src: vim/vimrc
+    dest: ~/.vimrc
+
+- name: manage vim directory
+  copy:
+    src: vim
+    dest: ~/.vim
+
+- name: make sure temporary .vim directories exists
+  file:
+    dest: ~/.vim/{{ item }}
+    state: directory
+  with_items:
+    - tmp
+    - tmp/swap
+    - tmp/undo
+    - tmp/backup
+    - bundle
+
+- name: manage neobundle package
+  git:
+    repo: git://github.com/Shougo/neobundle.vim
+    dest: ~/.vim/bundle/neobundle.vim
+
+- name: trigger neobundle installation
+  system: vim +NeoBundleInstall +qall

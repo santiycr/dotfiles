@@ -1,0 +1,5 @@
+ - include: vim.yml
+   tags:
+     - vim
+    when: 'vim' in setup_dotfiles or setup_dotfiles == 'all'
+
