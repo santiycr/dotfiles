@@ -21,11 +21,12 @@ windows:
       panes:
         - cds; clear
         - cds; ~/Dev/dklab_realsync/realsync
-        - velour
-        - mosh --ssh="ssh -p 3422" -p 60000 $DEV_SERVER
-  - tests:
-      panes:
-        - cdt; clear
+        - cdt;clear
+        - mosh --ssh="ssh -p 3422" -p 60000 sauce@$DEV_SERVER
   - selenium: 
       panes:
         - cd ~/Dev/selenium; clear
+  - ansible:
+      panes:
+        - cd ~/SauceLabs/sauce-ansible; clear
+        - cd ~/SauceLabs/sauce-ansible; clear
