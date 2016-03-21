@@ -218,7 +218,8 @@ NeoBundle 'Shougo/vimproc.vim', {
 \    },
 \ }
 NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mbbill/undotree'
@@ -249,7 +250,7 @@ NeoBundle 'vim-scripts/vim-json-bundle'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'rizzatti/funcoo.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'santiycr/grin.vim'
+NeoBundle 'rking/ag.vim'
 NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'chrisbra/NrrwRgn'
 NeoBundle 'Lokaltog/vim-easymotion'
@@ -319,9 +320,9 @@ let g:solarized_menu=0
 nnoremap <leader>u :UndotreeToggle<CR>
 " Tagbar window
 nnoremap <leader>t :TagbarToggle<CR>
-" Grin for the last search.
-nnoremap <silent> <leader>grin :execute "GrinFromSearch!"<CR>
-
+" Ag for the last search.
+let g:ag_working_path_mode="r"
+nnoremap <silent> <leader>ag :execute "AgFromSearch!"<CR>
 
 " nerdtree
 nnoremap <leader>n :NERDTreeToggle<CR>
