@@ -156,6 +156,10 @@ class GitInstallation(Installation):
 
     def steps(self):
         self.install('hub')
+        if platform.system() == 'Darwin':
+            self.install('diff-so-fancy')
+        else:
+            os.system('npm install -g diff-so-fancy')
         self.safe_ln('git/gitconfig', '.gitconfig')
         self.safe_ln('git/gitignore', '.gitignore')
 
