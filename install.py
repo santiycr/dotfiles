@@ -52,8 +52,13 @@ class Installation(object):
                 continue
             for installation in find_installations(dependency):
                 installation().run(already_installed)
-        self.steps()
+        if self.verify():
+            self.steps()
         already_installed.append(self.NAME)
+
+    def verify(self):
+        question = "> Proceed installing installation %s [Yn]: " % self.NAME
+        return raw_input(question).lower() in ['', 'y']
 
     def steps(self):
         """ installation subclasses need to define their own steps method """
