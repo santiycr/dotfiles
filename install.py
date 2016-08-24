@@ -45,6 +45,12 @@ class Installation(object):
             raise Exception('SAYWHAA')
         os.system("%s %s %s" % (installer, extras, package))
 
+    def cask_install(self, package, extras=''):
+        if platform.system() != 'Darwin':
+            raise Exception('SAYWHAA')
+        installer = 'brew cask install'
+        os.system("%s %s %s" % (installer, extras, package))
+
     def run(self, already_installed):
         print 'Installing %s' % self.NAME
         for dependency in self.DEPENDENCIES:
@@ -81,13 +87,21 @@ class DotfilesInstallation(Installation):
                   % self.DOTFILES_PATH)
 
 
+class CaskInstallation(Installation):
+    NAME = "cask"
+
+    def steps(self):
+        self.install('tmux')
+
+
 class VimInstallation(Installation):
     NAME = "vim"
-    DEPENDENCIES = ['dotfiles', 'lint', 'git']
+    DEPENDENCIES = ['dotfiles', 'lint', 'git', 'cask']
 
     def steps(self):
         if platform.system() == 'Darwin':
-            self.install('macvim', '--override-system-vim')
+            self.cask_install('macvim')
+            self.cask_install('font-inconsolata-for-powerline')
         self.safe_ln('vim/vimrc', '.vimrc')
         self.safe_ln('vim', '.vim')
         self.safe_mkdir('.vim/tmp')
