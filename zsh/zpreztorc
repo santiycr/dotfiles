@@ -167,8 +167,8 @@ if [ -e $HOME/setenv.sh ]; then
     . $HOME/setenv.sh
 fi
 
-export VISUAL=vim
-export EDITOR=vim
+export VISUAL=nvim
+export EDITOR=nvim
 
 # load RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

@@ -1,5 +1,6 @@
 vim/tmp/*
-vim/bundle
+vim/autoload
+vim/plugged
 vim/.netrwhist
 vim/doc
 vim/init.vim
