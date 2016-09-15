@@ -3,7 +3,6 @@
 import sys
 import os
 import shutil
-import subprocess
 import platform
 
 
@@ -201,8 +200,16 @@ class ZshInstallation(Installation):
         os.system('chsh -s /bin/zsh')
 
 
+class NodeInstallation(Installation):
+    NAME = 'node'
+
+    def steps(self):
+        self.install('node')
+
+
 class GitInstallation(Installation):
     NAME = 'git'
+    DEPENDENCIES = ['node']
 
     def steps(self):
         self.install('hub')
@@ -225,22 +232,11 @@ class BinInstallation(Installation):
 
 class LintInstallation(Installation):
     NAME = 'lint'
+    DEPENDENCIES = ['node']
 
     def steps(self):
-        with open(os.devnull, "w") as devnull:
-
-            for lint in ['pep8', 'flake8']:
-                if not subprocess.call(['which', '-s', lint],
-                                       stdout=devnull, stderr=devnull):
-                    break
-            else:
-                print "WARNING: No pep8 lint-like found in path"
-
-            for lint in ['jshint']:
-                if subprocess.call(['which', '-s', lint],
-                                   stdout=devnull, stderr=devnull):
-                    print "WARNING: No %s binary found in path" % lint
-
+        os.system('pip install --user flake8')
+        os.system('npm install -g jshint')
         self.safe_ln('lint/pep8', '.pep8')
         self.safe_mkdir('.config')
         self.safe_ln('lint/flake8', '.config/flake8')
