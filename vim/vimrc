@@ -262,7 +262,9 @@ NeoBundle 'tmux-plugins/vim-tmux'
 NeoBundle 'regedarek/ZoomWin'
 if has("mac")
     NeoBundle 'rizzatti/dash.vim'
-    set macmeta
+    if !has('nvim')
+        set macmeta
+    endif
 endif
 call neobundle#end()
 filetype plugin indent on " Keep below neobundle#end!!!
