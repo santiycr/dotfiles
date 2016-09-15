@@ -143,6 +143,7 @@ bindkey '^B' zaw-git-recent-branches
 # Auto start a session when Zsh is launched in a SSH connection.
 zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
+zstyle ':prezto:module:autosuggestions:color' found 'fg=240'
 
 #Nodepath
 export NODE_PATH=/usr/local/lib/node
