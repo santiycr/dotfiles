@@ -1,6 +1,7 @@
 " Note: Skip initialization for vim-tiny or vim-small.
 if !1 | finish | endif
 
+set nocompatible
 set encoding=utf8
 set fileformat=unix
 set modelines=0
@@ -193,22 +194,9 @@ endif
 " Use Node.js for JavaScript interpretation
 let $JS_CMD='node'
 
-if has('vim_starting')
-  set nocompatible               " Be iMproved
+call plug#begin('~/.vim/plugged')
 
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Bundles
-NeoBundle 'Shougo/vimproc.vim', {
+Plug 'Shougo/vimproc.vim', {
 \ 'build' : {
 \     'windows' : 'tools\\update-dll-mingw',
 \     'cygwin' : 'make -f make_cygwin.mak',
@@ -217,56 +205,63 @@ NeoBundle 'Shougo/vimproc.vim', {
 \     'unix' : 'gmake',
 \    },
 \ }
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'mbbill/undotree'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'myusuf3/numbers.vim'
-NeoBundle 'msanders/snipmate.vim'
-NeoBundle 'tristen/vim-sparkup'
-NeoBundle 'tsaleh/vim-supertab'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-eunuch'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-git'
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'nelstrom/vim-markdown-preview'
-NeoBundle 'klen/python-mode'
-NeoBundle 'jmcantrell/vim-virtualenv'
-NeoBundle 'sophacles/vim-bundle-mako'
-NeoBundle 'jnwhiteh/vim-golang'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'vim-scripts/vim-json-bundle'
-NeoBundle 'derekwyatt/vim-scala'
-NeoBundle 'rizzatti/funcoo.vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'chrisbra/NrrwRgn'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'maxbrunsfeld/vim-yankstack'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'tommcdo/vim-exchange'
-NeoBundle 'sickill/vim-pasta'
-NeoBundle 'tmux-plugins/vim-tmux'
-NeoBundle 'regedarek/ZoomWin'
+Plug 'flazz/vim-colorschemes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+Plug 'kien/ctrlp.vim'
+Plug 'mbbill/undotree'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'myusuf3/numbers.vim'
+Plug 'msanders/snipmate.vim'
+Plug 'tristen/vim-sparkup'
+Plug 'tsaleh/vim-supertab'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-markdown'
+Plug 'nelstrom/vim-markdown-preview'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'sophacles/vim-bundle-mako'
+Plug 'jnwhiteh/vim-golang'
+Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
+Plug 'vim-scripts/vim-json-bundle'
+Plug 'derekwyatt/vim-scala'
+Plug 'rizzatti/funcoo.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'rking/ag.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'chrisbra/NrrwRgn'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'godlygeek/tabular'
+Plug 'tommcdo/vim-exchange'
+Plug 'sickill/vim-pasta'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'regedarek/ZoomWin'
+Plug 'davidhalter/jedi-vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
+Plug 'hynek/vim-python-pep8-indent'
+
+
+let g:deoplete#enable_at_startup = 1
 if has("mac")
-    NeoBundle 'rizzatti/dash.vim'
+    Plug 'rizzatti/dash.vim'
     if !has('nvim')
         set macmeta
     endif
 endif
-call neobundle#end()
+call plug#end()
+
 filetype plugin indent on " Keep below neobundle#end!!!
 
 " Airline
@@ -281,19 +276,15 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:bufferline_echo=0
 
-" python tweaks
-let g:pymode_folding = 0
-let g:pymode_rope = 1
-let g:pymode_rope_complete_on_dot = 1
-let g:pymode_lint = 1
-let g:pymode_lint_on_write = 0
-let g:pymode_lint_error_symbol = '✗'
-let g:pymode_lint_todo_symbol = '⚠'
-let g:pymode_virtualenv = 1
+" Jedi
+let g:jedi#use_splits_not_buffers = "left"
+let g:jedi#popup_on_dot = 0
+
+
+" syntastic tweaks
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_enable_balloons = 0
-let g:pymode_indent = 1
 " close preview window (used for docs) once insert is done
 autocmd InsertLeave * :pc
 
@@ -339,6 +330,3 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
 nmap <unique> <c-w>z  <Plug>ZoomWin
-
-" Installation check.
-NeoBundleCheck
