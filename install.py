@@ -97,7 +97,7 @@ class CaskInstallation(Installation):
     NAME = "cask"
 
     def steps(self):
-        self.install('tmux')
+        self.tap('caskroom/cask')
 
 
 class VimInstallation(Installation):
