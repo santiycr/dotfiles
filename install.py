@@ -114,10 +114,9 @@ class VimInstallation(Installation):
         self.safe_mkdir('.vim/tmp/swap')
         self.safe_mkdir('.vim/tmp/undo')
         self.safe_mkdir('.vim/tmp/backup')
-        self.safe_mkdir('.vim/bundle')
-        os.system('git clone git://github.com/Shougo/neobundle.vim'
-                  ' ~/.vim/bundle/neobundle.vim')
-        os.system('vim +NeoBundleInstall +qall')
+        os.system('curl -fLo ~/.vim/autoload/plug.vim --create-dirs'
+                  'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+        os.system('vim +PlugInstall +qall')
 
 
 class NeoVimInstallation(Installation):
@@ -134,10 +133,9 @@ class NeoVimInstallation(Installation):
         self.safe_mkdir('.config/nvim/tmp/swap')
         self.safe_mkdir('.config/nvim/tmp/undo')
         self.safe_mkdir('.config/nvim/tmp/backup')
-        self.safe_mkdir('.config/nvim/bundle')
-        os.system('git clone git://github.com/Shougo/neobundle.vim'
-                  ' ~/.config/nvim/bundle/neobundle.vim')
-        os.system('nvim +NeoBundleInstall +qall')
+        os.system('curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs'
+                  'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+        os.system('vim +PlugInstall +qall')
 
 
 class VimrInstallation(Installation):
