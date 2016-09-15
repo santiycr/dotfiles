@@ -36,6 +36,13 @@ class Installation(object):
         if not os.path.isdir(dest):
             os.mkdir(dest)
 
+    def tap(self, src, extras=''):
+        if platform.system() == 'Darwin':
+            installer = 'brew tap'
+        else:
+            raise Exception('SAYWHAA')
+        os.system("%s %s %s" % (installer, extras, src))
+
     def install(self, package, extras=''):
         if platform.system() == 'Darwin':
             installer = 'brew install'
@@ -112,6 +119,35 @@ class VimInstallation(Installation):
         os.system('git clone git://github.com/Shougo/neobundle.vim'
                   ' ~/.vim/bundle/neobundle.vim')
         os.system('vim +NeoBundleInstall +qall')
+
+
+class NeoVimInstallation(Installation):
+    NAME = "neovim"
+    DEPENDENCIES = ['vim']
+
+    def steps(self):
+        if platform.system() == 'Darwin':
+            self.tap('neovim/neovim')
+            self.install('neovim')
+        self.safe_mkdir('.config')
+        self.safe_ln('vim', '.config/nvim')
+        self.safe_ln('vim/vimrc', '.config/nvim/init.vim')
+        self.safe_mkdir('.config/nvim/tmp/swap')
+        self.safe_mkdir('.config/nvim/tmp/undo')
+        self.safe_mkdir('.config/nvim/tmp/backup')
+        self.safe_mkdir('.config/nvim/bundle')
+        os.system('git clone git://github.com/Shougo/neobundle.vim'
+                  ' ~/.config/nvim/bundle/neobundle.vim')
+        os.system('nvim +NeoBundleInstall +qall')
+
+
+class VimrInstallation(Installation):
+    NAME = "vimr"
+    DEPENDENCIES = ['neovim']
+
+    def steps(self):
+        if platform.system() == 'Darwin':
+            self.cask_install('vimr')
 
 
 class VirtualenvInstallation(Installation):
