@@ -156,6 +156,7 @@ export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 export PATH=$PATH:$HOME/Library/Python/2.7/bin
 # npm
 export PATH=$PATH:/usr/local/share/npm/bin
+
 if [ -e $HOME/.venvburrito/startup.sh ]; then
     source $HOME/.venvburrito/startup.sh
 fi
@@ -181,3 +182,6 @@ eval_ondir() {
   eval "`ondir \"$OLDPWD\" \"$PWD\"`"
 }
 chpwd_functions=( eval_ondir $chpwd_functions )
+
+# enable z installed via brew
+. `brew --prefix`/etc/profile.d/z.sh
