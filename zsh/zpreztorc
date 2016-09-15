@@ -154,6 +154,7 @@ export PATH=$HOME/bin:$HOME/.venvburrito/bin:$HOME/.rvm/bin:/usr/local/bin:/usr/
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 # user pip installs
 export PATH=$PATH:$HOME/Library/Python/2.7/bin
+export PATH=$PATH:$HOME/Library/Python/3.5/bin
 # npm
 export PATH=$PATH:/usr/local/share/npm/bin
 
