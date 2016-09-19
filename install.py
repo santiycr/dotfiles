@@ -147,6 +147,16 @@ class VimrInstallation(Installation):
             self.cask_install('vimr')
 
 
+class HammerspoonInstallation(Installation):
+    NAME = "hammerspoon"
+
+    def steps(self):
+        if platform.system() != 'Darwin':
+            raise Exception('SAYWHAA')
+        self.cask_install('hammerspoon')
+        self.safe_ln('hammerspoon', '.hammerspoon')
+
+
 class VirtualenvInstallation(Installation):
     NAME = "virtualenv"
     DEPENDENCIES = ['zsh']
