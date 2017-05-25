@@ -172,6 +172,8 @@ class TmuxInstallation(Installation):
 
     def steps(self):
         self.install('tmux')
+        self.install('fpp')
+        self.install('urlview')
         self.safe_ln('tmux/tmux.conf', '.tmux.conf')
         self.safe_mkdir('.tmux')
         self.safe_mkdir('.tmux/plugins')

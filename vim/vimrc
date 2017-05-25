@@ -246,6 +246,7 @@ Plug 'godlygeek/tabular'
 Plug 'tommcdo/vim-exchange'
 Plug 'sickill/vim-pasta'
 Plug 'tmux-plugins/vim-tmux'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'regedarek/ZoomWin'
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
