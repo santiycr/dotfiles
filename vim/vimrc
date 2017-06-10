@@ -246,12 +246,14 @@ Plug 'godlygeek/tabular'
 Plug 'tommcdo/vim-exchange'
 Plug 'sickill/vim-pasta'
 Plug 'tmux-plugins/vim-tmux'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'regedarek/ZoomWin'
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'hynek/vim-python-pep8-indent'
+Plug 'benmills/vimux'
 
 
 let g:deoplete#enable_at_startup = 1
