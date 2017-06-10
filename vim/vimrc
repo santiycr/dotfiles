@@ -63,7 +63,7 @@ set smarttab
 set tabstop=8
 set softtabstop=4
 set shiftwidth=4
-au BufNewFile,BufReadPost *.css,*.html,*.mako,*.rb,*.erb,*.coffee,*.js,*.json set shiftwidth=2
+au BufNewFile,BufReadPost *.css,*.html,*.mako,*.rb,*.erb,*.coffee,*.js,*.json,*.yml set shiftwidth=2
 
 " other visuals
 set wildmenu
@@ -227,7 +227,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown'
-Plug 'nelstrom/vim-markdown-preview'
+Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'sophacles/vim-bundle-mako'
 Plug 'jnwhiteh/vim-golang'
@@ -332,4 +332,8 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-nmap <unique> <c-w>z  <Plug>ZoomWin
+" nmap <unique> <c-w>z  <Plug>ZoomWin
+"
+" Markdown preview
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_github=1
