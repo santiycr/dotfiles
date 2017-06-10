@@ -174,6 +174,8 @@ class TmuxInstallation(Installation):
         self.install('tmux')
         self.install('fpp')
         self.install('urlview')
+        if platform.system() == 'Darwin':
+            self.install('reattach-to-user-namespace')
         self.safe_ln('tmux/tmux.conf', '.tmux.conf')
         self.safe_mkdir('.tmux')
         self.safe_mkdir('.tmux/plugins')
