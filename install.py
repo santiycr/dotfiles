@@ -14,9 +14,10 @@ class Installation(object):
     NAME = "REDEFINE"
     DEPENDENCIES = []
 
-    def __init__(self):
+    def __init__(self, skip_verify):
         self.DOTFILES_PATH = os.path.dirname(os.path.realpath(__file__))
         self.HOME_PATH = os.environ['HOME']
+        self.skip_verify = skip_verify
 
     def safe_ln(self, source, dest):
         source = "%s/%s" % (self.DOTFILES_PATH, source)
@@ -63,8 +64,8 @@ class Installation(object):
             if dependency in already_installed:
                 continue
             for installation in find_installations(dependency):
-                installation().run(already_installed)
-        if self.verify():
+                installation(self.skip_verify).run(already_installed)
+        if self.skip_verify or self.verify():
             self.steps()
         already_installed.append(self.NAME)
 
@@ -278,9 +279,12 @@ def find_installations(name):
 
 if __name__ == "__main__":
     installs = sys.argv[1:]
+    skip_verify = '-y' in installs
+    if skip_verify:
+        installs.remove('-y')
 
     already_installed = []
     for install in installs:
         for installation in find_installations(install):
             if installation.NAME not in already_installed:
-                installation().run(already_installed)
+                installation(skip_verify).run(already_installed)
