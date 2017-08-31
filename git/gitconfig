@@ -23,6 +23,7 @@
   autocrlf = input
   editor = nvim
   excludesfile = ~/.gitignore
+  whitespace = warn
 [push]
   default = simple
 [pull]
