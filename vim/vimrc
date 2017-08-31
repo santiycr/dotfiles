@@ -63,7 +63,7 @@ set smarttab
 set tabstop=8
 set softtabstop=4
 set shiftwidth=4
-au BufNewFile,BufReadPost *.css,*.html,*.mako,*.rb,*.erb,*.coffee,*.js,*.json,*.yml set shiftwidth=2
+au BufNewFile,BufReadPost *.css,*.html,*.mako,*.rb,*.erb,*.coffee,*.js,*.json set shiftwidth=2
 
 " other visuals
 set wildmenu
@@ -220,6 +220,7 @@ Plug 'tristen/vim-sparkup'
 Plug 'tsaleh/vim-supertab'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'
@@ -227,6 +228,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown'
+Plug 'avakhov/vim-yaml'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'sophacles/vim-bundle-mako'
