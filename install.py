@@ -87,11 +87,6 @@ class DotfilesInstallation(Installation):
                   'git submodule update;'
                   'cd -;'
                   % self.DOTFILES_PATH)
-        os.system('cd %s/zsh/prezto;'
-                  'git submodule init;'
-                  'git submodule update;'
-                  'cd -;'
-                  % self.DOTFILES_PATH)
 
 
 class CaskInstallation(Installation):
@@ -210,13 +205,9 @@ class ZshInstallation(Installation):
     DEPENDENCIES = ['dotfiles']
 
     def steps(self):
-        self.safe_ln('zsh/prezto', '.zprezto')
-        self.safe_ln('zsh/prezto/runcoms/zshrc', '.zshrc')
-        self.safe_ln('zsh/prezto/runcoms/zshenv', '.zshenv')
-        self.safe_ln('zsh/prezto/runcoms/zlogin', '.zlogin')
-        self.safe_ln('zsh/prezto/runcoms/zlogout', '.zlogout')
-        self.safe_ln('zsh/prezto/runcoms/zprofile', '.zprofile')
-        self.safe_ln('zsh/zpreztorc', '.zpreztorc')
+        self.install('zplug')
+        self.safe_ln('zsh/zshrc', '.zshrc')
+        os.system('zplug install')
         os.system('chsh -s /bin/zsh')
 
 
