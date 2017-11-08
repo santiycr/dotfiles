@@ -1,0 +1,24 @@
+# ~/.tmuxinator/mule.yml
+
+name: olivine
+root: ~/Projects/Olivine/www.olivinemarketing.com
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: source .venv/bin/activate
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+windows:
+  - code:
+      layout: 289b,238x61,0,0[238x44,0,0,21,238x16,0,45{118x16,0,45,23,119x16,119,45,24}]
+      panes:
+        - editor:
+          - nvim
+        - git:
+          - git st
+        - shell:
+          - k
+  - server:
+    - cactus serve
+

@@ -102,7 +102,7 @@ set spellfile=~/.vim/custom-dictionary.utf-8.add
 syn spell toplevel
 
 " Automatically reload vimrc
-autocmd! bufwritepost vimrc source ~/.vimrc
+autocmd! bufwritepost vimrc source ~/.config/nvim/vimrc
 
 " Other mappings
 nnoremap Y y$
@@ -110,9 +110,9 @@ map <C-j> :bn<cr>
 map <C-k> :bp<cr>
 
 " Backups
-set undodir=~/.vim/tmp/undo//     " undo files
-set backupdir=~/.vim/tmp/backup// " backups
-set directory=~/.vim/tmp/swap//   " swap files
+set undodir=~/.config/nvim/tmp/undo//     " undo files
+set backupdir=~/.config/nvim/tmp/backup// " backups
+set directory=~/.config/nvim/tmp/swap//   " swap files
 set undofile
 set backup                        " enable backups
 set noswapfile                    " It's 2012, Vim.
@@ -217,7 +217,7 @@ Plug 'scrooloose/syntastic'
 Plug 'myusuf3/numbers.vim'
 Plug 'msanders/snipmate.vim'
 Plug 'tristen/vim-sparkup'
-Plug 'tsaleh/vim-supertab'
+Plug 'ervandew/supertab'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -256,7 +256,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'benmills/vimux'
-
+Plug 'mattn/emmet-vim'
+Plug 'Chiel92/vim-autoformat'
 
 let g:deoplete#enable_at_startup = 1
 if has("mac")
@@ -283,7 +284,7 @@ let g:bufferline_echo=0
 
 " Jedi
 let g:jedi#use_splits_not_buffers = "left"
-let g:jedi#popup_on_dot = 0
+let g:jedi#popup_on_dot = 1
 
 
 " syntastic tweaks

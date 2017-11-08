@@ -58,6 +58,19 @@ class Installation(object):
         installer = 'brew cask install'
         os.system("%s %s %s" % (installer, extras, package))
 
+    def pip_install(self, package, upgrade=True):
+        for pip_binary in ['pip3', 'pip', 'pip2']:
+            if shutil.which(pip_install):
+                break
+        else:
+            raise Exception("No pip available")
+
+        os.system("{} install --user {} {}".format(
+            pip_binary, "--upgrade" if upgrade else "", package))
+
+    def npm_install(self, package):
+        os.system('npm install -g {}'.format(package))
+
     def run(self, already_installed):
         print 'Installing %s' % self.NAME
         for dependency in self.DEPENDENCIES:
@@ -96,33 +109,15 @@ class CaskInstallation(Installation):
         self.tap('caskroom/cask')
 
 
-class VimInstallation(Installation):
-    NAME = "vim"
-    DEPENDENCIES = ['dotfiles', 'lint', 'git', 'cask']
-
-    def steps(self):
-        if platform.system() == 'Darwin':
-            self.cask_install('macvim')
-            self.cask_install('font-inconsolata-for-powerline')
-        self.safe_ln('vim/vimrc', '.vimrc')
-        self.safe_ln('vim', '.vim')
-        self.safe_mkdir('.vim/tmp')
-        self.safe_mkdir('.vim/tmp/swap')
-        self.safe_mkdir('.vim/tmp/undo')
-        self.safe_mkdir('.vim/tmp/backup')
-        os.system('curl -fLo ~/.vim/autoload/plug.vim --create-dirs '
-                  'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
-        os.system('vim +PlugInstall +qall')
-
-
 class NeoVimInstallation(Installation):
     NAME = "neovim"
-    DEPENDENCIES = ['vim']
+    DEPENDENCIES = ['dotfiles', 'lint', 'git', 'cask', 'autoformat']
 
     def steps(self):
         if platform.system() == 'Darwin':
             self.tap('neovim/neovim')
-            self.install('neovim')
+        self.install('neovim')
+        self.pip_install('neovim')
         self.safe_mkdir('.config')
         self.safe_ln('vim', '.config/nvim')
         self.safe_ln('vim/vimrc', '.config/nvim/init.vim')
@@ -131,7 +126,17 @@ class NeoVimInstallation(Installation):
         self.safe_mkdir('.config/nvim/tmp/backup')
         os.system('curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs '
                   'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
-        os.system('vim +PlugInstall +qall')
+        os.system('nvim +PlugInstall +qall')
+
+
+class autoformatInstallation(Installation):
+    NAME = "autoformat"
+
+    def steps(self):
+        self.install('tiny-html5')
+        self.pip_install('autopep8')
+        self.pip_install('js-beautify')
+        self.pip_install('remark-cli')
 
 
 class VimrInstallation(Installation):
@@ -151,15 +156,6 @@ class HammerspoonInstallation(Installation):
             raise Exception('SAYWHAA')
         self.cask_install('hammerspoon')
         self.safe_ln('hammerspoon', '.hammerspoon')
-
-
-class VirtualenvInstallation(Installation):
-    NAME = "virtualenv"
-    DEPENDENCIES = ['zsh']
-
-    def steps(self):
-        os.system('which mkvirtualenv || curl -s https://raw.github.com/brainsik/'
-                  'virtualenv-burrito/master/virtualenv-burrito.sh | $SHELL')
 
 
 class TmuxInstallation(Installation):
@@ -227,7 +223,7 @@ class GitInstallation(Installation):
         if platform.system() == 'Darwin':
             self.install('diff-so-fancy')
         else:
-            os.system('npm install -g diff-so-fancy')
+            self.npm_install('diff-so-fancy')
         self.safe_ln('git/gitconfig', '.gitconfig')
         self.safe_ln('git/gitignore', '.gitignore')
 
@@ -246,8 +242,8 @@ class LintInstallation(Installation):
     DEPENDENCIES = ['node']
 
     def steps(self):
-        os.system('pip install --user flake8')
-        os.system('npm install -g jshint')
+        os.pip_install('flake8')
+        self.npm_install('jshint')
         self.safe_ln('lint/pep8', '.pep8')
         self.safe_mkdir('.config')
         self.safe_ln('lint/flake8', '.config/flake8')
