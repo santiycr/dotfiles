@@ -27,6 +27,8 @@ zplug "modules/utility", from:prezto
 zplug "modules/tmux", from:prezto
 zplug "plugins/aws",   from:oh-my-zsh
 zplug "plugins/vi-mode",   from:oh-my-zsh
+zplug "mafredri/zsh-async", from:github
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
 # Install plugins if there are plugins that have not been installed
 # if ! zplug check; then
@@ -64,8 +66,6 @@ eval_ondir() {
   eval "`ondir \"$OLDPWD\" \"$PWD\"`"
 }
 chpwd_functions=( eval_ondir $chpwd_functions )
-autoload -U promptinit; promptinit
-prompt pure
 KEYTIMEOUT=1
 export EDITOR=nvim
 
