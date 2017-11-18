@@ -1,7 +1,7 @@
 # ~/.tmuxinator/blameless.yml
 
 name: blameless
-root: ~/Projects/Blameless/blameless-demo
+root: ~/Projects/Blameless/
 
 # Optional tmux socket
 # socket_name: foo
@@ -43,13 +43,47 @@ root: ~/Projects/Blameless/blameless-demo
 # post: tmux -CC attach -t blameless
 
 windows:
-  - editor:
+  - blamo:
       layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
+      root: ~/Projects/Blameless/blamo
+      pre_window: workon blamo
       panes:
         - nvim
+        - make develop
         - git st
-        -
-  - server: ls
+  - logger:
+      layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      root: ~/Projects/Blameless/logger
+      pre_window: sleep 3; workon logger
+      panes:
+        -  nvim
+        -  make develop
+        -  git st
+  - helm-vars:
+      layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      root: ~/Projects/Blameless/helm-vars
+      pre_window: sleep 4; workon helm-vars
+      panes:
+        -  nvim
+        -  tree
+        -  git st
+  - blameless_bot:
+      layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      root: ~/Projects/Blameless/blameless_bot
+      pre_window: sleep 5; workon blameless_bot
+      panes:
+        -  nvim
+        -  make develop
+        -  git st
