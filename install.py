@@ -101,6 +101,26 @@ class DotfilesInstallation(Installation):
                   'cd -;'
                   % self.DOTFILES_PATH)
 
+class MacInstallation(Installation):
+    NAME = "mac"
+
+    def steps(self):
+        # Show all extrensions
+        os.system('defaults write -g AppleShowAllExtensions -bool true')
+        # unhide Library
+        os.system('chflags nohidden ~/Library')
+        # Set Current Folder as Default Search Scope
+        os.system('defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"')
+        # Set Default Finder Location to Home Folder
+        os.system('defaults write com.apple.finder NewWindowTarget -string "PfLo" &&'
+                  'defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"')
+        # Disable Creation of Metadata Files on Network Volumes
+        os.system('defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true')
+        # Disable Creation of Metadata Files on USB Volumes
+        os.system('defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true')
+        # Enable FileVault
+        os.system('sudo fdesetup enable')
+
 
 class CaskInstallation(Installation):
     NAME = "cask"
