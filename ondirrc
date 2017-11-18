@@ -1,15 +1,14 @@
-enter ~/SauceLabs/sauce
-  workon sauce
-  saucepath
+enter ~/Projects/Blameless/blamo
+  workon blamo
 
-enter ~/SauceLabs/sauce-ansible
-  workon sauce-ansible
+enter ~/Projects/Blameless/logger
+  workon logger
 
-enter ~/SauceLabs/tests
-  workon tests
+enter ~/Projects/Blameless/blameless_bot
+  workon blameless_bot
 
-enter ~/SauceLabs/changelog
-  workon changelog
+enter ~/Projects/Blameless/helm-vars
+  workon helm-vars
 
-leave ~/SauceLabs/tests:~/SauceLabs/sauce:~/SauceLabs/sauce-ansible:~/Saucelabs/changelog
+leave ~/Projects/Blameless/blamo:~/Projects/Blameless/blameless_bot:~/Projects/Blameless/logger:~/Projects/Blameless/helm-vars
   deactivate > /dev/null 2>&1
