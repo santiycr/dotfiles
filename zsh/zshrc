@@ -73,4 +73,8 @@ export EDITOR=nvim
 # added by travis gem
 [ -f /Users/santiagosuarezordonez/.travis/travis.sh ] && source /Users/santiagosuarezordonez/.travis/travis.sh
 
+# virtualenv setup
+export WORKON_HOME=~/.virtualenvs
+source $HOME/Library/Python/2.7/bin/virtualenvwrapper_lazy.sh
+
 alias mux=tmuxinator
