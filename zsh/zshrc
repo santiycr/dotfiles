@@ -1,48 +1,40 @@
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+# load zgen
+source "${HOME}/.zgen/zgen.zsh"
 
-zplug "chrissicool/zsh-256color"
-zplug "djui/alias-tips"
-zplug "supercrabtree/k"
-zplug "sharat87/pip-app"
-zplug "hkupty/ssh-agent"
-zplug "iam4x/zsh-iterm-touchbar"
-zplug "zlsun/solarized-man"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "zdharma/fast-syntax-highlighting"
-zplug "zdharma/history-search-multi-word", defer:1
-zplug "sei40kr/zsh-tmux-rename", if:"[ -n "$TMUX" ]"
-zplug "modules/completion",   from:prezto
-zplug "modules/environment", from:prezto
-zplug "modules/terminal", from:prezto
-zplug "modules/node", from:prezto
-zplug "modules/git", from:prezto
-zplug "modules/python", from:prezto
-zplug "modules/osx", from:prezto
-zplug "modules/history", from:prezto
-zplug "modules/directory", from:prezto
-zplug "modules/spectrum", from:prezto
-zplug "modules/utility", from:prezto
-zplug "modules/tmux", from:prezto
-zplug "plugins/aws",   from:oh-my-zsh
-zplug "plugins/vi-mode",   from:oh-my-zsh
-zplug "mafredri/zsh-async", from:github
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+# if the init scipt doesn't exist
+if ! zgen saved; then
+    echo "Creating a zgen save"
 
-# Install plugins if there are plugins that have not been installed
-# if ! zplug check; then
-#     printf "Install? [y/N]: "
-#     if read -q; then
-#         echo; zplug install
-#     fi
-# fi
+    zgen prezto prompt theme 'pure'
+    zgen prezto
+    zgen prezto node
+    zgen prezto git
+    zgen prezto python
+    zgen prezto osx
+    zgen prezto spectrum
+    zgen prezto tmux
 
-# Then, source plugins and add commands to $PATH
-zplug load
+    # zgen load miekg/lean
+    zgen load chrissicool/zsh-256color
+    zgen load supercrabtree/k
+    zgen load hkupty/ssh-agent
+    zgen load iam4x/zsh-iterm-touchbar
+    zgen load zlsun/solarized-man
+    zgen load zsh-users/zsh-autosuggestions
+    zgen load zdharma/fast-syntax-highlighting
+    zgen load sei40kr/zsh-tmux-rename
+    zgen load willghatch/zsh-saneopt
+    zgen load laurenkt/zsh-vimto
+    zgen load zdharma/history-search-multi-word
+    zgen load hlissner/zsh-autopair
+    zgen load MichaelAquilina/zsh-autoswitch-virtualenv
 
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-export HISTFILE=~/.zhistory
+    # save all to init script
+    zgen save
+fi
+
+unsetopt AUTO_NAME_DIRS       # Don't auto add variable-stored paths to ~ list.
+bindkey "^R" history-search-multi-word
 
 # Path setups
 export PATH=$HOME/bin:/usr/X11/bin:$PATH
@@ -61,13 +53,8 @@ fi
 
 # enable z installed via brew
 . `brew --prefix`/etc/profile.d/z.sh
-#
-# Make ondir work
-eval_ondir() {
-  eval "`ondir \"$OLDPWD\" \"$PWD\"`"
-}
-chpwd_functions=( eval_ondir $chpwd_functions )
-KEYTIMEOUT=1
+
+# switch to neovim for my editor
 export EDITOR=nvim
 
 # added by travis gem
@@ -78,3 +65,4 @@ export WORKON_HOME=~/.virtualenvs
 source $HOME/Library/Python/2.7/bin/virtualenvwrapper_lazy.sh
 
 alias mux=tmuxinator
+

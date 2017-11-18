@@ -258,6 +258,7 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'benmills/vimux'
 Plug 'mattn/emmet-vim'
 Plug 'Chiel92/vim-autoformat'
+Plug 'ryanoasis/vim-devicons'
 
 let g:deoplete#enable_at_startup = 1
 if has("mac")

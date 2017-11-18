@@ -221,9 +221,14 @@ class ZshInstallation(Installation):
     DEPENDENCIES = ['dotfiles']
 
     def steps(self):
-        self.install('zplug')
         self.safe_ln('zsh/zshrc', '.zshrc')
-        os.system('zplug install')
+
+        # os.system('git clone https://github.com/tarjoilija/zgen.git'
+        #           ' ~/.zgen')
+        # TODO Use a custom fork of zgen that drops prezto modules on top:
+        os.system('git clone git@github.com:brandon-fryslie/zgen.git'
+                  ' ~/.zgen')
+        os.system('zsh -i -c exit')
         os.system('chsh -s /bin/zsh')
 
 
