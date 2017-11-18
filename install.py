@@ -90,17 +90,6 @@ class Installation(object):
         """ installation subclasses need to define their own steps method """
         print "steps method hasn't been defined! Broken installation"
 
-
-class DotfilesInstallation(Installation):
-    NAME = "dotfiles"
-
-    def steps(self):
-        os.system('cd %s;'
-                  'git submodule init;'
-                  'git submodule update;'
-                  'cd -;'
-                  % self.DOTFILES_PATH)
-
 class MacInstallation(Installation):
     NAME = "mac"
 
@@ -131,11 +120,13 @@ class CaskInstallation(Installation):
 
 class NeoVimInstallation(Installation):
     NAME = "neovim"
-    DEPENDENCIES = ['dotfiles', 'lint', 'git', 'cask', 'autoformat']
+    DEPENDENCIES = ['lint', 'git', 'cask', 'autoformat']
 
     def steps(self):
         if platform.system() == 'Darwin':
             self.tap('neovim/neovim')
+            self.tap('caskroom/fonts')
+            self.cask_install('font-inconsolata-nerd-font')
         self.install('neovim')
         self.pip_install('neovim')
         self.safe_mkdir('.config')
@@ -218,7 +209,6 @@ class OndirInstallation(Installation):
 
 class ZshInstallation(Installation):
     NAME = "zsh"
-    DEPENDENCIES = ['dotfiles']
 
     def steps(self):
         self.safe_ln('zsh/zshrc', '.zshrc')

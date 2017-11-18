@@ -49,7 +49,7 @@ set sidescroll=1
 set sidescrolloff=10
 
 "Set font type and size. Depends on the resolution. Larger screens, prefer h20
-set guifont=Inconsolata\ for\ Powerline:h16
+set guifont=Inconsolata\ for\ Powerline\ Nerd\ Font\ Complete:h16
 
 " Better Completion
 set completeopt=longest,menuone,preview
