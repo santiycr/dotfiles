@@ -298,8 +298,13 @@ autocmd InsertLeave * :pc
 let g:tagbar_autoshowtag = 1
 
 " Indent guides
+" let g:indent_guides_enable_on_vim_startup = 0
+" let g:indent_guides_color_change_percent = 2
 let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_color_change_percent = 2
+let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=base03
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
+
 
 " Dash
 nmap <silent> <leader>d <Plug>DashSearch
@@ -340,3 +345,4 @@ map <Leader>k <Plug>(easymotion-k)
 " Markdown preview
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_github=1
+let g:virtualenv_auto_activate=1
