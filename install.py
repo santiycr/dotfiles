@@ -109,6 +109,20 @@ class MacInstallation(Installation):
         os.system('defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true')
         # Enable FileVault
         os.system('sudo fdesetup enable')
+        # https://github.com/sindresorhus/quick-look-plugins
+        self.cask_install('qlcolorcode')
+        self.cask_install('qlstephen')
+        self.cask_install('qlmarkdown')
+        self.cask_install('quicklook-json')
+        self.cask_install('qlprettypatch')
+        self.cask_install('quicklook-csv')
+        self.cask_install('betterzipql')
+        self.cask_install('qlimagesize')
+        self.cask_install('webpquicklook')
+        self.cask_install('suspicious-package')
+        self.cask_install('quicklookase')
+        self.cask_install('qlvideo')
+
 
 
 class CaskInstallation(Installation):
