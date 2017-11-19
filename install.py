@@ -233,7 +233,11 @@ class ZshInstallation(Installation):
         os.system('git clone git@github.com:brandon-fryslie/zgen.git'
                   ' ~/.zgen')
         os.system('zsh -i -c exit')
-        os.system('chsh -s /bin/zsh')
+        if platform.system() == 'Darwin':
+            self.install('zsh')
+            os.system('sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh')
+        else:
+            os.system('chsh -s /bin/zsh')
 
 
 class NodeInstallation(Installation):
