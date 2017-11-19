@@ -14,20 +14,21 @@ if ! zgen saved; then
     zgen prezto spectrum
     zgen prezto tmux
 
-    # zgen load miekg/lean
     zgen load chrissicool/zsh-256color
+    zgen load willghatch/zsh-saneopt
     zgen load supercrabtree/k
     zgen load hkupty/ssh-agent
     zgen load iam4x/zsh-iterm-touchbar
-    zgen load zlsun/solarized-man
     zgen load zsh-users/zsh-autosuggestions
     zgen load zdharma/fast-syntax-highlighting
     zgen load sei40kr/zsh-tmux-rename
-    zgen load willghatch/zsh-saneopt
     zgen load laurenkt/zsh-vimto
-    zgen load zdharma/history-search-multi-word
     zgen load hlissner/zsh-autopair
     zgen load MichaelAquilina/zsh-autoswitch-virtualenv
+    zgen load zdharma/history-search-multi-word
+    zgen load robertzk/send.zsh
+    zgen load mattbangert/kubectl-zsh-plugin
+    zgen load littleq0903/gcloud-zsh-completion
 
     # save all to init script
     zgen save
