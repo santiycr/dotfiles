@@ -29,12 +29,13 @@ if ! zgen saved; then
     zgen load robertzk/send.zsh
     zgen load mattbangert/kubectl-zsh-plugin
     zgen load littleq0903/gcloud-zsh-completion
+    zgen load unixorn/autoupdate-zgen
 
     # save all to init script
     zgen save
 fi
 
-unsetopt AUTO_NAME_DIRS       # Don't auto add variable-stored paths to ~ list.
+unsetopt AUTO_NAME_DIRS       # Dont auto add variable-stored paths to ~ list.
 bindkey "^R" history-search-multi-word
 
 # Path setups
