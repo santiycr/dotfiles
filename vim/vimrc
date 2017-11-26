@@ -34,6 +34,9 @@ set noshowmode
 let mapleader = ","
 set termguicolors
 
+" Live preview substitutions
+set inccommand=split
+
 " Column highlight
 set colorcolumn=+1
 let &colorcolumn="+1,".join(range(120,999),",")
@@ -264,6 +267,7 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'cyansprite/Extract'
+Plug 'machakann/vim-highlightedyank'
 
 
 let g:deoplete#enable_at_startup = 1
