@@ -32,6 +32,7 @@ set cursorline
 set tabpagemax=50
 set noshowmode
 let mapleader = ","
+set termguicolors
 
 " Column highlight
 set colorcolumn=+1
@@ -205,10 +206,10 @@ Plug 'Shougo/vimproc.vim', {
 \     'unix' : 'gmake',
 \    },
 \ }
-Plug 'flazz/vim-colorschemes'
+Plug 'iCyMind/NeoSolarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'kien/ctrlp.vim'
 Plug 'mbbill/undotree'
 Plug 'majutsushi/tagbar'
@@ -250,6 +251,7 @@ Plug 'sickill/vim-pasta'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'roxma/vim-tmux-clipboard'
 Plug 'regedarek/ZoomWin'
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -261,6 +263,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
+Plug 'cyansprite/Extract'
 
 
 let g:deoplete#enable_at_startup = 1
@@ -313,12 +316,9 @@ nmap <silent> <leader>d <Plug>DashSearch
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "Color scheme
-let g:solarized_hitrail=1    "default value is 0
 syntax enable
 set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
-let g:solarized_menu=0
+colorscheme NeoSolarized
 
 " Undotree window
 nnoremap <leader>u :UndotreeToggle<CR>
