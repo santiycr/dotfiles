@@ -213,7 +213,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'mbbill/undotree'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'myusuf3/numbers.vim'
 Plug 'msanders/snipmate.vim'
 Plug 'tristen/vim-sparkup'
@@ -260,6 +260,8 @@ Plug 'mattn/emmet-vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'ryanoasis/vim-devicons'
+Plug 'mhinz/vim-startify'
+
 
 let g:deoplete#enable_at_startup = 1
 if has("mac")
@@ -280,19 +282,13 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#ale#enabled = 1
 let g:bufferline_echo=0
 
 " Jedi
 let g:jedi#use_splits_not_buffers = "left"
 let g:jedi#popup_on_dot = 1
 
-
-" syntastic tweaks
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_enable_balloons = 0
 " close preview window (used for docs) once insert is done
 autocmd InsertLeave * :pc
 
@@ -307,6 +303,8 @@ let g:indent_guides_auto_colors = 0
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=base03
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
 
+let g:ale_sign_error = ''
+let g:ale_sign_warning = ''
 
 " Dash
 nmap <silent> <leader>d <Plug>DashSearch

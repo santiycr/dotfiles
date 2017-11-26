@@ -142,6 +142,7 @@ class NeoVimInstallation(Installation):
             self.tap('caskroom/fonts')
             self.cask_install('font-inconsolata-nerd-font')
         self.install('neovim')
+        self.install('grip') # used by markdown-preview
         self.pip_install('neovim')
         self.safe_mkdir('.config')
         self.safe_ln('vim', '.config/nvim')
