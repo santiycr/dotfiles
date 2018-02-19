@@ -276,7 +276,7 @@ class LintInstallation(Installation):
     DEPENDENCIES = ['node']
 
     def steps(self):
-        os.pip_install('flake8')
+        self.pip_install('flake8')
         self.npm_install('jshint')
         self.safe_ln('lint/pep8', '.pep8')
         self.safe_mkdir('.config')

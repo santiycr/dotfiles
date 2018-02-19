@@ -51,18 +51,28 @@ windows:
       root: ~/Projects/Blameless/blamo
       panes:
         - nvim
-        - make develop
-        - git st
-  - logger:
+        - make test
+        - k
+  - incidental:
       layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
-      root: ~/Projects/Blameless/logger
+      root: ~/Projects/Blameless/incidental
       panes:
-        -  nvim
-        -  make develop
-        -  git st
+        - nvim
+        - make test
+        - k
+  - atlas:
+      layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      root: ~/Projects/Blameless/atlas
+      panes:
+        - nvim
+        - make test
+        - k
   - helm-vars:
       layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
@@ -70,16 +80,14 @@ windows:
       # synchronize: after
       root: ~/Projects/Blameless/helm-vars
       panes:
-        -  nvim
-        -  tree
-        -  git st
-  - blameless_bot:
-      layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
-      root: ~/Projects/Blameless/blameless_bot
+        - git status
+        - k
+        - tree
+  - local-servers:
+      root: ~/Projects/Blameless
       panes:
-        -  nvim
-        -  make develop
-        -  git st
+        - /usr/local/sbin/rabbitmq-server 
+        - cd blamo/blamo; pipenv run nameko run --config config.yml blamo
+        - cd incidental/incidental; pipenv run nameko run --config config.yml incidental
+        - cd atlas/atlas; pipenv run nameko run --config config.yml atlas
+        - cd clapperboard/clapperboard; pipenv run nameko run --config config.yml clapperboard

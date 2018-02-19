@@ -213,13 +213,13 @@ Plug 'iCyMind/NeoSolarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'myusuf3/numbers.vim'
-Plug 'msanders/snipmate.vim'
 Plug 'tristen/vim-sparkup'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-abolish'
@@ -260,6 +260,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'hynek/vim-python-pep8-indent'
+Plug 'okcompute/vim-python-motions'
 Plug 'benmills/vimux'
 Plug 'mattn/emmet-vim'
 Plug 'Chiel92/vim-autoformat'
@@ -268,9 +269,21 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'cyansprite/Extract'
 Plug 'machakann/vim-highlightedyank'
+Plug 'janko-m/vim-test'
+" Track the engine.
+Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
 
+" vim-test strategy
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#show_docstring = 1
 if has("mac")
     Plug 'rizzatti/dash.vim'
     if !has('nvim')
@@ -294,7 +307,7 @@ let g:bufferline_echo=0
 
 " Jedi
 let g:jedi#use_splits_not_buffers = "left"
-let g:jedi#popup_on_dot = 1
+let g:jedi#popup_on_dot = 0
 
 " close preview window (used for docs) once insert is done
 autocmd InsertLeave * :pc
@@ -310,14 +323,20 @@ let g:indent_guides_auto_colors = 0
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=base03
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
 
+let g:ale_completion_enabled = 0
 let g:ale_sign_error = ''
 let g:ale_sign_warning = ''
 
+" fzf.vim bind
+nnoremap <C-p> :GFiles<cr>
+nmap <silent> <leader>fg :GFiles<cr>
+nmap <silent> <leader>ff :Files<cr>
+nmap <silent> <leader>fh :History<cr>
+nmap <silent> <leader>fb :Buffers<CR>
+nmap <silent> <leader>fc :Commits<CR>
+
 " Dash
 nmap <silent> <leader>d <Plug>DashSearch
-
-" CtrlP
-set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "Color scheme
 syntax enable
@@ -327,7 +346,7 @@ colorscheme NeoSolarized
 " Undotree window
 nnoremap <leader>u :UndotreeToggle<CR>
 " Tagbar window
-nnoremap <leader>t :TagbarToggle<CR>
+nnoremap <leader>tb :TagbarToggle<CR>
 " Ag for the last search.
 let g:ag_working_path_mode="r"
 nnoremap <silent> <leader>ag :execute "AgFromSearch!"<CR>

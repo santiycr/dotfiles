@@ -24,7 +24,6 @@ if ! zgen saved; then
     zgen load sei40kr/zsh-tmux-rename
     zgen load laurenkt/zsh-vimto
     zgen load hlissner/zsh-autopair
-    zgen load MichaelAquilina/zsh-autoswitch-virtualenv
     zgen load zdharma/history-search-multi-word
     zgen load robertzk/send.zsh
     zgen load mattbangert/kubectl-zsh-plugin
@@ -35,7 +34,9 @@ if ! zgen saved; then
     zgen save
 fi
 
-unsetopt AUTO_NAME_DIRS       # Dont auto add variable-stored paths to ~ list.
+# Dont auto add variable-stored paths to ~ list.
+unsetopt auto_name_dirs      
+setopt prompt_cr prompt_sp
 bindkey "^R" history-search-multi-word
 
 # Path setups
@@ -62,9 +63,7 @@ export EDITOR=nvim
 # added by travis gem
 [ -f /Users/santiagosuarezordonez/.travis/travis.sh ] && source /Users/santiagosuarezordonez/.travis/travis.sh
 
-# virtualenv setup
-export WORKON_HOME=~/.virtualenvs
-source $HOME/Library/Python/2.7/bin/virtualenvwrapper_lazy.sh
-
 alias mux=tmuxinator
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
