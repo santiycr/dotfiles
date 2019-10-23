@@ -37,9 +37,12 @@ set termguicolors
 " Live preview substitutions
 set inccommand=split
 
+"Better line wrapping
+set wrap
+set textwidth=100
+set formatoptions=qrn1
 " Column highlight
-set colorcolumn=+1
-let &colorcolumn="+1,".join(range(120,999),",")
+let &colorcolumn="80,100,".join(range(120,999),",")
 
 set ttimeout
 set ttimeoutlen=50
@@ -54,6 +57,15 @@ set sidescrolloff=10
 
 "Set font type and size. Depends on the resolution. Larger screens, prefer h20
 set guifont=Inconsolata\ for\ Powerline\ Nerd\ Font\ Complete:h16
+if exists('g:vv')
+    VVset fontfamily=InconsolataForPowerline\ Nerd\ Font
+    VVset fontsize=16
+    VVset windowheight=100%
+    VVset windowwidth=100%
+    VVset windowleft=0
+    VVset windowtop=0
+
+endif
 
 " Better Completion
 set completeopt=longest,menuone,preview
@@ -82,23 +94,17 @@ set wildignore+=migrations                       " Django migrations
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
 
-" folds
-set foldlevel=0
-
-"Better line wrapping
-set wrap
-set textwidth=80
-set formatoptions=qrn1
-
 " search
 set ignorecase
 set smartcase
-set incsearch
 set showmatch
 set hlsearch
 
 " Press Space to turn off highlighting and clear any message already displayed.
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
+" set cwd to the current file
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Spellcheck with vim (set spell / set nospell)
 set dictionary=/usr/share/dict/words
@@ -110,8 +116,6 @@ autocmd! bufwritepost vimrc source ~/.config/nvim/vimrc
 
 " Other mappings
 nnoremap Y y$
-map <C-j> :bn<cr>
-map <C-k> :bp<cr>
 
 " Backups
 set undodir=~/.config/nvim/tmp/undo//     " undo files
@@ -124,9 +128,8 @@ set noswapfile                    " It's 2012, Vim.
 " Use the below highlight group when displaying bad whitespace is desired
 highlight BadWhitespace ctermbg=red guibg=red
 
-" Make trailing whitespace be flagged as bad.
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+" folds
+set nofoldenable 
 
 " shortcuts and abbreviations
 abbreviate pdbst import pdb;pdb.set_trace()
@@ -150,7 +153,6 @@ if has('gui_running')
     set go-=L
     set go-=r
     set go-=R
-    set foldenable
     set so=7
 
     " only blink the cursor on input mode
@@ -218,12 +220,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
-Plug 'w0rp/ale'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'myusuf3/numbers.vim'
 Plug 'tristen/vim-sparkup'
-Plug 'ervandew/supertab'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -234,18 +237,8 @@ Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown'
 Plug 'avakhov/vim-yaml'
 Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'jmcantrell/vim-virtualenv'
 Plug 'sophacles/vim-bundle-mako'
-Plug 'jnwhiteh/vim-golang'
-Plug 'pangloss/vim-javascript'
-Plug 'kchmck/vim-coffee-script'
-Plug 'vim-scripts/vim-json-bundle'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'derekwyatt/vim-scala'
 Plug 'rizzatti/funcoo.vim'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'Numkil/ag.nvim'
 Plug 'brooth/far.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/NrrwRgn'
@@ -259,24 +252,41 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'regedarek/ZoomWin'
-Plug 'davidhalter/jedi-vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+" Use release branch
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'okcompute/vim-python-motions'
+Plug 'tmhedberg/SimpylFold'
+Plug 'bronson/vim-trailing-whitespace'
 Plug 'benmills/vimux'
-Plug 'mattn/emmet-vim'
-Plug 'Chiel92/vim-autoformat'
 Plug 'pbrisbin/vim-mkdir'
+Plug 'ianks/vim-tsx'
 Plug 'ryanoasis/vim-devicons'
+Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'mhinz/vim-startify'
 Plug 'cyansprite/Extract'
 Plug 'machakann/vim-highlightedyank'
 Plug 'janko-m/vim-test'
-" Track the engine.
-Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'tpope/vim-speeddating'
+Plug 'myusuf3/numbers.vim'
+Plug 'lilydjwg/colorizer'
+Plug 'sbdchd/neoformat'
+Plug 'junegunn/vim-peekaboo'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'alvan/vim-closetag'
+Plug 'Yggdroot/indentLine'
+
+" Coc config
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-python']
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 
 " vim-test strategy
 nmap <silent> <leader>t :TestNearest<CR>
@@ -284,6 +294,13 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
+map / <Plug>(incsearch-easymotion-/)
+map ? <Plug>(incsearch-easymotion-?)
+
+" don't use tabs for snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#show_docstring = 1
@@ -297,16 +314,28 @@ call plug#end()
 
 filetype plugin indent on " Keep below neobundle#end!!!
 
+" Indent guides
+" let g:indent_guides_enable_on_vim_startup = 0
+" let g:indent_guides_color_change_percent = 2
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=base03
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
+
 " Airline
 let g:airline_powerline_fonts=1
 let g:airline_theme='solarized'
 let g:airline_exclude_filenames = ['DebuggerWatch', 'DebuggerStack', 'DebuggerStatus']
-let g:airline#extensions#tabline#enabled = 1
+let g:airline_extensions = ['branch', 'hunks', 'coc', 'tabline']
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#ale#enabled = 1
 let g:bufferline_echo=0
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+" Configure error/warning section to use coc.nvim
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " Jedi
 let g:jedi#use_splits_not_buffers = "left"
@@ -318,17 +347,26 @@ autocmd InsertLeave * :pc
 " tagbar config
 let g:tagbar_autoshowtag = 1
 
-" Indent guides
-" let g:indent_guides_enable_on_vim_startup = 0
-" let g:indent_guides_color_change_percent = 2
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=base03
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
-
-let g:ale_completion_enabled = 0
-let g:ale_sign_error = ''
-let g:ale_sign_warning = ''
+let g:python_host_prog = '/Users/santiagosuarezordonez/.pyenv/versions/neovim2/bin/python'
+let test#strategy = "neovim"
+" Point YCM to the Pipenv created virtualenv, if possible
+" At first, get the output of 'pipenv --venv' command.
+let pipenv_venv_path = system('pipenv --venv')
+" The above system() call produces a non zero exit code whenever
+" a proper virtual environment has not been found.
+" So, second, we only point YCM to the virtual environment when
+" the call to 'pipenv --venv' was successful.
+" Remember, that 'pipenv --venv' only points to the root directory
+" of the virtual environment, so we have to append a full path to
+" the python executable.
+if v:shell_error == 0
+  let venv_path = substitute(pipenv_venv_path, '\n', '', '')
+  let g:python3_host_prog = venv_path . '/bin/python'
+  let test#python#pytest#executable = venv_path . '/bin/pytest'
+else
+  let g:python_host_prog = '/Users/santiagosuarezordonez/.pyenv/versions/neovim2/bin/python'
+  let g:python3_host_prog = '/Users/santiagosuarezordonez/.pyenv/versions/neovim3/bin/python'
+endif
 
 " fzf.vim bind
 nnoremap <C-p> :GFiles<cr>
@@ -341,6 +379,24 @@ nmap <silent> <leader>fc :Commits<CR>
 " Dash
 nmap <silent> <leader>d <Plug>DashSearch
 
+" === coc.nvim === "
+nmap <silent> <leader>dd <Plug>(coc-definition)
+nmap <silent> <leader>dr <Plug>(coc-references)
+nmap <silent> <leader>dj <Plug>(coc-implementation)
+
+" Nerdtree
+nmap <silent> <leader>n :NERDTreeToggle<CR>
+nmap <leader>nf :NERDTreeFind<CR>
+" auto-open nerdtree if no files were given on start
+autocmd vimenter * if !argc() | Startify | NERDTreeToggle | wincmd w | endif
+" auto-close tab if nerdtree is hte only buffer left
+autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') | q | endif
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeQuitOnOpen = 1
+
+
+" "
 "Color scheme
 syntax enable
 set background=dark
@@ -350,12 +406,21 @@ colorscheme NeoSolarized
 nnoremap <leader>u :UndotreeToggle<CR>
 " Tagbar window
 nnoremap <leader>tb :TagbarToggle<CR>
-" Ag for the last search.
-let g:ag_working_path_mode="r"
-nnoremap <silent> <leader>ag :execute "AgFromSearch!"<CR>
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
 
-" nerdtree
-nnoremap <leader>n :NERDTreeToggle<CR>
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+" bind K to grep word under cursor
+nnoremap <silent> <leader>ag :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind \ (backward slash) to grep shortcut
+" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 map <Leader>s <Plug>(easymotion-s2)
 
@@ -365,6 +430,8 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+map <Leader>l <Plug>(easymotion-l)
+map <Leader>h <Plug>(easymotion-h)
 
 " nmap <unique> <c-w>z  <Plug>ZoomWin
 "
@@ -372,3 +439,13 @@ map <Leader>k <Plug>(easymotion-k)
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_github=1
 let g:virtualenv_auto_activate=1
+
+" Ultisnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader>b"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+abbreviate BD /Users/santiagosuarezordonez/Projects/Blameless

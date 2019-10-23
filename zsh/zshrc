@@ -5,7 +5,7 @@ source "${HOME}/.zgen/zgen.zsh"
 if ! zgen saved; then
     echo "Creating a zgen save"
 
-    zgen prezto prompt theme 'pure'
+    # zgen prezto prompt theme 'pure'
     zgen prezto
     zgen prezto node
     zgen prezto git
@@ -14,6 +14,7 @@ if ! zgen saved; then
     zgen prezto spectrum
     zgen prezto tmux
 
+    zgen load denysdovhan/spaceship-prompt spaceship
     zgen load chrissicool/zsh-256color
     zgen load willghatch/zsh-saneopt
     zgen load supercrabtree/k
@@ -21,7 +22,6 @@ if ! zgen saved; then
     zgen load iam4x/zsh-iterm-touchbar
     zgen load zsh-users/zsh-autosuggestions
     zgen load zdharma/fast-syntax-highlighting
-    zgen load sei40kr/zsh-tmux-rename
     zgen load laurenkt/zsh-vimto
     zgen load hlissner/zsh-autopair
     zgen load zdharma/history-search-multi-word
@@ -35,19 +35,22 @@ if ! zgen saved; then
 fi
 
 # Dont auto add variable-stored paths to ~ list.
-unsetopt auto_name_dirs      
+unsetopt auto_name_dirs
 setopt prompt_cr prompt_sp
+export SPACESHIP_DIR_COLOR=blue
+export SPACESHIP_VI_MODE_SHOW="false"
 bindkey "^R" history-search-multi-word
 
 # Path setups
 export PATH=$HOME/bin:/usr/X11/bin:$PATH
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 export PATH=$PATH:$HOME/.gem/ruby/2.4.0/bin
-# user pip installs
-export PATH=$PATH:$HOME/Library/Python/2.7/bin
-export PATH=$PATH:$HOME/Library/Python/3.5/bin
 # npm
 export PATH=$PATH:/usr/local/share/npm/bin
+# pyenv
+export PATH=$HOME/.pyenv/bin:$PATH
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # Custom setups
 if [ -e $HOME/setenv.sh ]; then
@@ -67,3 +70,14 @@ alias mux=tmuxinator
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+alias md="make develop"
+alias mr="make release"
+alias mt="make test"
+alias ml="make lint"
+alias mwt="make watch-test"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="/usr/local/sbin:$PATH"

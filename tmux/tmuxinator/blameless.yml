@@ -31,10 +31,10 @@ root: ~/Projects/Blameless/
 # tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-# startup_window: editor
+startup_window: blamo
 
 # Specifies (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
-# startup_pane: 1
+startup_pane: 1
 
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
@@ -44,31 +44,31 @@ root: ~/Projects/Blameless/
 
 windows:
   - blamo:
-      layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
+      layout: 81d0,238x68,0,0[238x52,0,0,1,238x15,0,53{121x15,0,53,6,116x15,122,53,7}]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
-      root: ~/Projects/Blameless/blamo
+      root: ~/Projects/Blameless/services/blamo
       panes:
-        - pipenv run nvim
+        - nvim
         - make watch-test
         - k
   - incidental:
-      layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
+      layout: 81d0,238x68,0,0[238x52,0,0,1,238x15,0,53{121x15,0,53,6,116x15,122,53,7}]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
-      root: ~/Projects/Blameless/incidental
+      root: ~/Projects/Blameless/services/incidental
       panes:
-        - pipenv run nvim
+        - nvim
         - make watch-test
         - k
   - helm-vars:
-      layout: 0e61,238x61,0,0[238x42,0,0,51,238x18,0,43{121x18,0,43,53,116x18,122,43,54}]
+      layout: 81d0,238x68,0,0[238x52,0,0,1,238x15,0,53{121x15,0,53,6,116x15,122,53,7}]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
-      root: ~/Projects/Blameless/helm-vars
+      root: ~/Projects/Blameless/infra/helm-vars
       panes:
         - git status
         - k
@@ -76,8 +76,18 @@ windows:
   - local-servers:
       root: ~/Projects/Blameless
       panes:
-        - /usr/local/sbin/rabbitmq-server 
-        - cd blamo; make develop
-        - cd incidental; make develop
-        - cd atlas; make develop
-        - cd clapperboard; make develop
+        - /usr/local/sbin/rabbitmq-server
+        - mongod --config /usr/local/etc/mongod.conf
+        - cd services/blueprint; sleep 7; make develop
+        - cd services/incidental; sleep 8; make develop
+        - cd services/clapperboard; sleep 8; make develop
+        - cd services/chronicle; sleep 8; make develop
+        - cd services/postit; sleep 8; make develop
+        - cd services/thrift_shop; sleep 8; make develop
+        - cd services/locko; sleep 8; make develop
+        - cd services/resto; sleep 10; make develop
+        - cd services/cabinet; sleep 10; make develop
+        - cd services/atlas; sleep 10; make develop
+        - cd services/advisor; sleep 10; make develop
+        - cd services/maestro; echo 'maestro ready but not running yet'
+        - cd services/blamo; echo 'blamo ready but not running yet'
