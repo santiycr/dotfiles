@@ -1,6 +1,6 @@
 [user]
   name = Santiago Suarez Ordoñez
-	email = santiago@whyline.com
+  email = santiago@whyline.com
 [color]
   diff = auto
   status = auto
@@ -29,7 +29,11 @@
 [pull]
   default = simple
 [pager]
-	diff = diff-so-fancy | less --tabs=1,5 -RFX
-	show = diff-so-fancy | less --tabs=1,5 -RFX
+  diff = diff-so-fancy | less --tabs=1,5 -RFX
+  show = diff-so-fancy | less --tabs=1,5 -RFX
 [diff "sopsdiffer"]
-	textconv = sops -d
+  textconv = sops -d
+[credential]
+  helper = manager-core
+[credential "https://dev.azure.com"]
+  useHttpPath = true

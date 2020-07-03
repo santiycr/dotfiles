@@ -256,6 +256,8 @@ class GitInstallation(Installation):
         self.install('hub')
         if platform.system() == 'Darwin':
             self.install('diff-so-fancy')
+            self.tap('microsoft/git')
+            self.cask_install('git-credential-manager-core')
         else:
             self.npm_install('diff-so-fancy')
         self.safe_ln('git/gitconfig', '.gitconfig')
