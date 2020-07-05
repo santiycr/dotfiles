@@ -129,7 +129,7 @@ set noswapfile                    " It's 2012, Vim.
 highlight BadWhitespace ctermbg=red guibg=red
 
 " folds
-set nofoldenable 
+set nofoldenable
 
 " shortcuts and abbreviations
 abbreviate pdbst import pdb;pdb.set_trace()
@@ -239,7 +239,6 @@ Plug 'avakhov/vim-yaml'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'sophacles/vim-bundle-mako'
 Plug 'rizzatti/funcoo.vim'
-Plug 'brooth/far.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'chrisbra/NrrwRgn'
 Plug 'Lokaltog/vim-easymotion'
@@ -280,13 +279,6 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'alvan/vim-closetag'
 Plug 'Yggdroot/indentLine'
-
-" Coc config
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-python']
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 
 " vim-test strategy
 nmap <silent> <leader>t :TestNearest<CR>
@@ -349,7 +341,10 @@ let g:tagbar_autoshowtag = 1
 
 let g:python_host_prog = '/Users/santiagosuarezordonez/.pyenv/versions/neovim2/bin/python'
 let test#strategy = "neovim"
-" Point YCM to the Pipenv created virtualenv, if possible
+
+" coc.nvim
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-python']
+" Point to the Pipenv created virtualenv, if possible
 " At first, get the output of 'pipenv --venv' command.
 let pipenv_venv_path = system('pipenv --venv')
 " The above system() call produces a non zero exit code whenever
@@ -363,10 +358,18 @@ if v:shell_error == 0
   let venv_path = substitute(pipenv_venv_path, '\n', '', '')
   let g:python3_host_prog = venv_path . '/bin/python'
   let test#python#pytest#executable = venv_path . '/bin/pytest'
+  call coc#config('python', {
+    \   'jediEnabled': v:false,
+    \   'pythonPath': venv_path . '/bin/python',
+  \ })
 else
   let g:python_host_prog = '/Users/santiagosuarezordonez/.pyenv/versions/neovim2/bin/python'
   let g:python3_host_prog = '/Users/santiagosuarezordonez/.pyenv/versions/neovim3/bin/python'
+  call coc#config('python', {
+    \   'jediEnabled': v:false,
+  \ })
 endif
+autocmd FileType python let b:coc_root_patterns = ['Pipfile', '.git', '.env']
 
 " fzf.vim bind
 nnoremap <C-p> :GFiles<cr>
@@ -379,7 +382,9 @@ nmap <silent> <leader>fc :Commits<CR>
 " Dash
 nmap <silent> <leader>d <Plug>DashSearch
 
-" === coc.nvim === "
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 nmap <silent> <leader>dd <Plug>(coc-definition)
 nmap <silent> <leader>dr <Plug>(coc-references)
 nmap <silent> <leader>dj <Plug>(coc-implementation)
