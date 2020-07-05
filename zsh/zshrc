@@ -1,4 +1,3 @@
-# load zgen
 source "${HOME}/.zgen/zgen.zsh"
 
 # if the init scipt doesn't exist
@@ -47,6 +46,7 @@ export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 export PATH=$PATH:$HOME/.gem/ruby/2.4.0/bin
 # npm
 export PATH=$PATH:/usr/local/share/npm/bin
+export PATH=$PATH:$HOME/.local/bin
 # pyenv
 export PATH=$HOME/.pyenv/bin:$PATH
 eval "$(pyenv init -)"
