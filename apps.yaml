@@ -20,3 +20,4 @@ extras:
   - https://github.com/fatih/vim-go#install
   - https://github.com/preservim/nerdtree
   - https://github.com/vim-airline/vim-airline
+  - https://github.com/tpope/vim-fugitive
