@@ -99,3 +99,18 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# EXTENDED_HISTORY
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
+
+export COPYFILE_DISABLE=true
+export DOCKER_SCAN_SUGGEST=false
+
+alias trashit="git stash && git reset --hard HEAD"
+alias ktl="kubectl"
+alias goland="open -na \"GoLand.app\" --args \"$@\""
+
+#startup
+npm config set registry https://registry.npmjs.org
