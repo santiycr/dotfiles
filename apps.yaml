@@ -19,3 +19,4 @@ tooling:
 extras:
   - https://github.com/fatih/vim-go#install
   - https://github.com/preservim/nerdtree
+  - https://github.com/vim-airline/vim-airline
