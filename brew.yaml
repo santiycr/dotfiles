@@ -1,0 +1,8 @@
+apiVersion: v1alpha
+kind: brew
+formula:
+  - curl
+  - wget
+  - watch  
+  - stern
+
