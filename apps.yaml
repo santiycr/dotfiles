@@ -18,3 +18,4 @@ tooling:
   - node@16
 extras:
   - https://github.com/fatih/vim-go#install
+  - https://github.com/preservim/nerdtree
