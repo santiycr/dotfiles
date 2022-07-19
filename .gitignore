@@ -1,4 +1,1 @@
-vim/tmp/*
-vim/bundle
-vim/.netrwhist
-vim/doc
+.idea

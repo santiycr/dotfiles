@@ -1,0 +1,18 @@
+apiVersion: v1alpha
+kind: apps
+apps:
+  - iterm2
+  - slack
+  - docker
+  - spotify
+  - zoom
+  - chrome
+  - android studio
+tooling:
+  - curl
+  - ffmpeg
+  - wget
+  - watch
+  - stern
+  - nvm
+  - node@16
