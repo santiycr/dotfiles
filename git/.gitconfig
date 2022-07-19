@@ -1,0 +1,25 @@
+# This is Git's per-user configuration file.
+[user]
+	name = vrunoa
+	email = vruno.alassia@gmail.com
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    new = diff HEAD@{1} HEAD
+    wot = whatchanged
+[push]
+    default = simple
+[core]
+    editor = vim -f
+	precomposeUnicode = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+    required = true
+	process = git-lfs filter-process
+[commit]
+	gpgsign = false
